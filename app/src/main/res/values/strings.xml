@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Asistencia ECE</string>
+
+    <string name="title.login">Sistema de Control de Asistencia</string>
+    <string name="image.login.description">Logo de la institución</string>
+    <string name="hint.edtx_password">Ingresar Contraseña</string>
+    <string name="title_activity_padron">PadronActivity</string>
+    <string name="img.description">Imagen de descarga de padron</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="btn.login">Ingresar</string>
+</resources>
