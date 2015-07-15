@@ -72,6 +72,8 @@ public class UserDao extends BaseDAO {
                 userEntity.setRol(cursor.getString(cursor.getColumnIndex("rol")));
                 userEntity.setDescripcion(cursor.getString(cursor.getColumnIndex("descripcion")));
                 userEntity.setPassword(cursor.getString(cursor.getColumnIndex("clave")));
+            } else {
+                userEntity = null;
             }
         } catch (Exception ex) {
             userEntity = null;

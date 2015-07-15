@@ -47,7 +47,7 @@ public class SessionManager {
         }
     }*/
 
-    /*public HashMap<String, Object> getUserDetails(){
+    public HashMap<String, Object> getUserDetails(){
         HashMap<String, Object> user = new HashMap<String, Object>();
         user.put(KEY_USUARIO, sharedPreferences.getString(KEY_USUARIO, null));
         user.put(KEY_IDUSU, sharedPreferences.getInt(KEY_IDUSU, 0));
@@ -55,7 +55,7 @@ public class SessionManager {
         user.put(KEY_ESTADO, sharedPreferences.getString(KEY_ESTADO, null));
         user.put(KEY_PASSWORD, sharedPreferences.getString(KEY_PASSWORD, null));
         return user;
-    }*/
+    }
 
     public void logoutUser(){
         editor.clear();

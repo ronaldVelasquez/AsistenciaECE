@@ -7,7 +7,7 @@ import android.widget.Toast;
 
 import com.inei.asistenciaece.DAO.UserDao;
 import com.inei.asistenciaece.Entity.UserEntity;
-import com.inei.asistenciaece.MainActivity;
+import com.inei.asistenciaece.activitys.MainActivity;
 import com.inei.asistenciaece.Utils.SessionManager;
 
 public class UserBusiness {
@@ -28,7 +28,8 @@ public class UserBusiness {
         if(flag){
             sessionManager = new SessionManager(context);
             sessionManager.createLoginSession(userEntity.getUsuario(), userEntity.getIdUsu(), userEntity.getIdRol(), userEntity.getEstado(), userEntity.getPassword());
-
+            VersionBusiness versionBusiness = new VersionBusiness(context);
+            versionBusiness.addNewVersion();
         }
         Log.v(TAG, "End addUser");
     }
@@ -41,6 +42,7 @@ public class UserBusiness {
             sessionManager = new SessionManager(context);
             sessionManager.createLoginSession(userEntity.getUsuario(), userEntity.getIdUsu(), userEntity.getIdRol(), userEntity.getEstado(), userEntity.getPassword());
             Intent intent = new Intent(context, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
     }

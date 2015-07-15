@@ -4,8 +4,29 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.inei.asistenciaece.PadronActivity">
+    android:background="@color/white"
+    tools:context="com.inei.asistenciaece.activitys.PadronActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/title.padron"
+        android:id="@+id/txt_title_padron"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:textColor="@color/primary.dark"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"/>
 
-
+    <ImageButton
+        android:contentDescription="@string/img.description"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:id="@+id/img_btn_download"
+        android:background="@drawable/download_button"
+        android:layout_below="@+id/txt_title_padron"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

@@ -50,7 +50,7 @@
         app:met_primaryColor="@color/primary"
         app:met_textColorHint="@color/hint" />
 
-    <com.gc.materialdesign.views.ButtonRectangle
+    <Button
         android:id="@+id/btn_login"
         android:layout_width="200dp"
         android:layout_height="wrap_content"

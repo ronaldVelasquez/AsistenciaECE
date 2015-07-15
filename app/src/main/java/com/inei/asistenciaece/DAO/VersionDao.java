@@ -52,6 +52,8 @@ public class VersionDao extends BaseDAO {
             Log.v(TAG, "Start addVersion");
             contentValues = new ContentValues();
             contentValues.put("nro_version", versionEntity.getNro_version());
+            contentValues.put("usuarioCrea", versionEntity.getUsuarioCrea());
+            contentValues.put("fechaCrea", versionEntity.getFechaCrea());
             dbHelper.getDatabase().insertWithOnConflict("version", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
             dbHelper.setTransactionSuccessful();
         } catch (Exception ex){
@@ -74,6 +76,6 @@ public class VersionDao extends BaseDAO {
             cursor.close();
             closeDBHelper();
         }
-        Log.v(TAG, "Start delete Version");
+        Log.v(TAG, "End delete Version");
     }
 }

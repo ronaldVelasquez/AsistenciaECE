@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inei.asistenciaece" >
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/Theme.ECE" >
         <activity
-            android:name=".LoginActivity"
+            android:name=".activitys.LoginActivity"
             android:label="@string/app_name"
             android:screenOrientation="landscape">
             <intent-filter>
@@ -18,12 +19,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PadronActivity"
-            android:label="@string/title_activity_padron" >
+            android:name=".activitys.PadronActivity"
+            android:label="@string/title_activity_padron"
+            android:screenOrientation="landscape">
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main" >
+            android:name=".activitys.MainActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
