@@ -11,6 +11,7 @@ public class PostulanteEntity {
     private String m1_fecha;
     private int m2_estado;
     private String m2_fecha;
+    private int state;
 
     public PostulanteEntity(int id_local, int id_cargo, String dni, String ape_nom, String nro_aula, String lugar_asigna, int m1_estado, String m1_fecha, int m2_estado, String m2_fecha) {
         this.id_local = id_local;
@@ -26,6 +27,14 @@ public class PostulanteEntity {
     }
 
     public PostulanteEntity() {
+    }
+
+    public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
     }
 
     public int getId_local() {

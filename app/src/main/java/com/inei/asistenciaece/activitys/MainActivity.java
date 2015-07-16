@@ -9,12 +9,15 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.SessionManager;
+import com.inei.asistenciaece.fragments.ConsolidatedFragment;
+import com.inei.asistenciaece.fragments.PresenceFragment;
 import com.inei.asistenciaece.fragments.ReportFragment;
 
 import java.util.HashMap;
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private String drawerTitle;
     private SessionManager sessionManager;
     private String password;
+    private String username;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, Object> user = sessionManager.getUserDetails();
         password = String.valueOf(user.get(SessionManager.KEY_PASSWORD));
+        username = String.valueOf(user.get(SessionManager.KEY_USUARIO));
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
@@ -104,14 +109,41 @@ public class MainActivity extends AppCompatActivity {
     private void selectItem(String title) {
         // Enviar título como arguemento del fragmento
         Bundle args = new Bundle();
-        args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        Fragment fragment = null;
+        switch (title){
+            case "Reportes Locales":
+                args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
+                fragment = ReportFragment.newInstance(title);
+                fragment.setArguments(args);
+                break;
+            case "Asistencia":
+                args.putString(com.inei.asistenciaece.fragments.PresenceFragment.ARG_SECTION_TITLE, title);
+                fragment = PresenceFragment.newInstance(title);
+                fragment.setArguments(args);
+                break;
+            case "Consolidado":
+                args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_SECTION_TITLE, title);
+                args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_PASSWORD, password);
+                args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_USERNAME, username);
+                fragment = ConsolidatedFragment.newInstance(title, password, username);
+                fragment.setArguments(args);
+                break;
+            default:
+                args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
+                fragment = ReportFragment.newInstance(title);
+                fragment.setArguments(args);
+                break;
+        }
+        fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
+        /*args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
         Fragment fragment = ReportFragment.newInstance(title);
         fragment.setArguments(args);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager
                 .beginTransaction()
                 .replace(R.id.main_content, fragment)
-                .commit();
+                .commit();*/
         drawerLayout.closeDrawers(); // Cerrar drawer
         setTitle(title); // Setear título actual
     }

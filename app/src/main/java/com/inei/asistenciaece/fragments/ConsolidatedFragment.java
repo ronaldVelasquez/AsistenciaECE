@@ -16,18 +16,20 @@ import org.apache.http.util.EncodingUtils;
 
 
 public class ConsolidatedFragment extends Fragment {
-    private static final String ARG_SECTION_TITLE = "section number";
-    private static final String ARG_PASSWORD = "password";
-    private static final String ARG_USER = "user";
+    public static final String ARG_SECTION_TITLE = "section number";
+    public static final String ARG_PASSWORD = "password";
+    public static final String ARG_USERNAME = "user";
     private WebView webview;
 
     public ConsolidatedFragment() {
     }
 
-    public ConsolidatedFragment newInstance(String title) {
+    public static ConsolidatedFragment newInstance(String title, String password, String username) {
         ConsolidatedFragment fragment = new ConsolidatedFragment();
         Bundle args = new Bundle();
         args.putString(ARG_SECTION_TITLE, title);
+        args.putString(ARG_PASSWORD, password);
+        args.putString(ARG_USERNAME, username);
         fragment.setArguments(args);
         return fragment;
     }
@@ -36,7 +38,7 @@ public class ConsolidatedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_consolidated, container, false);
         webview = (WebView) view.findViewById(R.id.webView);
-        String postData = "user=" + ARG_USER + "&password=" + ARG_PASSWORD;
+        String postData = "user=" + ARG_USERNAME + "&password=" + ARG_PASSWORD;
         webview.postUrl(ConstantsUtils.URL_CONSOLIDATED, EncodingUtils.getBytes(postData, "BASE64"));
         webview.setWebViewClient(new WebViewClient() {
             @Override

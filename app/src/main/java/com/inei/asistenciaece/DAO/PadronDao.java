@@ -63,7 +63,7 @@ public class PadronDao extends BaseDAO {
                 for (LocalEntity localEntity : padronEntity.getLocal()){
                     contentValues = new ContentValues();
                     contentValues.put("id_local", localEntity.getId_local());
-                    contentValues.put("id_cargo", localEntity.getNombre_local());
+                    contentValues.put("nombre_local", localEntity.getNombre_local());
                     contentValues.put("direccion", localEntity.getDireccion());
                     dbHelper.getDatabase().insertWithOnConflict("local", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
                 }

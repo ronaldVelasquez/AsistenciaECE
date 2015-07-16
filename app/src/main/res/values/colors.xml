@@ -5,4 +5,7 @@
     <color name="error">#F44336</color>
     <color name="hint">#90CAF9</color>
     <color name="white">#ffffff</color>
+    <color name="warning">#FFC107</color>
+    <color name="correct">#009688</color>
+    <color name="error_postulante">#FF8A80</color>
 </resources>

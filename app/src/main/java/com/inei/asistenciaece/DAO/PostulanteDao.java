@@ -1,6 +1,12 @@
 package com.inei.asistenciaece.DAO;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.inei.asistenciaece.Entity.PostulanteEntity;
+import com.inei.asistenciaece.Utils.DateFormatUtil;
 
 public class PostulanteDao extends BaseDAO{
 
@@ -18,4 +24,45 @@ public class PostulanteDao extends BaseDAO{
         initDBHelper(context);
     }
 
+    public PostulanteEntity checkPresence(String dni){
+        Log.v(TAG, "Star checkPrensence");
+        PostulanteEntity postulanteEntity = new PostulanteEntity();
+        try{
+            openDBHelper();
+            SQL = "select * from postulante where dni like '" + dni + "'";
+            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()){
+                postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m1_estado")));
+                postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
+                postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
+                postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
+                postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
+                postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
+
+                if (postulanteEntity.getM1_estado() == 0){
+                    Log.v(TAG, "Checking Presence");
+                    contentValues = new ContentValues();
+                    contentValues.put("m1_estado", 1);
+                    contentValues.put("m1_fecha", DateFormatUtil.getDate());
+                    String where = "dni like '" + dni + "'";
+                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
+                    dbHelper.setTransactionSuccessful();
+                } else {
+                    Log.v(TAG, "Checked Presence");
+                }
+            } else {
+                postulanteEntity.setM1_estado(3);
+                Log.v(TAG, "Postulante not found");
+            }
+        } catch (Exception ex) {
+            postulanteEntity.setM1_estado(4);
+            ex.printStackTrace();
+            Log.e(TAG, "Error database");
+        } finally {
+            Log.v(TAG, "End checkPresence");
+            cursor.close();
+            closeDBHelper();
+        }
+        return postulanteEntity;
+    }
 }
