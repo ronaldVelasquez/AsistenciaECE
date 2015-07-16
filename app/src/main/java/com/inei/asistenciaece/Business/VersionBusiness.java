@@ -45,9 +45,11 @@ public class VersionBusiness {
                     int localVersion = getNroVersionLocal();
                     if(localVersion < versionEntity.getNro_version()){
                         Intent intent = new Intent(context, PadronActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     } else {
                         Intent intent = new Intent(context, MainActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context.startActivity(intent);
                     }
                 } catch (Exception ex){
