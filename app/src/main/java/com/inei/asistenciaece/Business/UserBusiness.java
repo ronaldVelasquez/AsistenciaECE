@@ -15,7 +15,6 @@ public class UserBusiness {
     private Context context;
     private UserDao userDao;
     private SessionManager sessionManager;
-    private VersionBusiness versionBusiness;
 
     public UserBusiness(Context context) {
         this.context = context;
@@ -27,23 +26,27 @@ public class UserBusiness {
         boolean flag = userDao.addUser(userEntity);
         if(flag){
             sessionManager = new SessionManager(context);
-            sessionManager.createLoginSession(userEntity.getUsuario(), userEntity.getIdUsu(), userEntity.getIdRol(), userEntity.getEstado(), userEntity.getPassword());
+            sessionManager.createLoginSession(userEntity.getUsuario(), userEntity.getIdUsu(), userEntity.getIdRol(), userEntity.getEstado(), userEntity.getPassword(), userEntity.getId_local());
             VersionBusiness versionBusiness = new VersionBusiness(context);
             versionBusiness.addNewVersion();
         }
         Log.v(TAG, "End addUser");
     }
 
-    public void searchUser(String password) {
-        UserEntity userEntity = userDao.searchUser(password);
+    public void searchUser(String password, String username) {
+        UserEntity userEntity = userDao.searchUser(password, username);
         if(userEntity == null){
             Toast.makeText(context, "El password ingresado es incorrecto", Toast.LENGTH_SHORT).show();
         } else {
             sessionManager = new SessionManager(context);
-            sessionManager.createLoginSession(userEntity.getUsuario(), userEntity.getIdUsu(), userEntity.getIdRol(), userEntity.getEstado(), userEntity.getPassword());
+            sessionManager.createLoginSession(userEntity.getUsuario(), userEntity.getIdUsu(), userEntity.getIdRol(), userEntity.getEstado(), userEntity.getPassword(), userEntity.getId_local());
             Intent intent = new Intent(context, MainActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
         }
+    }
+
+    public void deleteUser() {
+        userDao.deleteUser();
     }
 }

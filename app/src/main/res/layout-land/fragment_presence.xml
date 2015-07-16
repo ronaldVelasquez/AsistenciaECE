@@ -1,8 +1,170 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="16dp"
     tools:context="com.inei.asistenciaece.fragments.PresenceFragment">
 
 
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/edtx_dni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20sp"
+        android:hint="@string/hint.edtx_dni"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textSize="30sp"
+        app:met_baseColor="@color/primary.dark"
+        app:met_errorColor="@color/error"
+        app:met_floatingLabel="highlight"
+        app:met_maxCharacters="10"
+        app:met_primaryColor="@color/primary"
+        app:met_textColorHint="@color/hint" />
 
+    <TextView
+        android:id="@+id/label_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtx_dni"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp"
+        android:hint="@string/hint.label.presence"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="20sp"
+        android:visibility="invisible" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/label_message"
+        android:layout_marginTop="10dp"
+        android:background="@color/bright_foreground_disabled_material_light" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/view"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+            <RelativeLayout
+                android:id="@+id/layout_postulante"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/label_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label.name.presence"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_name"
+                    android:hint="@string/hint.name.presence"
+                    android:textSize="35sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/label_cargo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_name"
+                    android:text="@string/label.cargo.presence"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_cargo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_cargo"
+                    android:hint="@string/hint.cargo.presence"
+                    android:textSize="35sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/label_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_cargo"
+                    android:text="@string/label.location.presence"
+                    android:textSize="35sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/txt_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_location"
+                    android:hint="@string/hint.location.presence"
+                    android:textSize="35sp"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+            </RelativeLayout>
+
+        </ScrollView>
+
+        <TableLayout
+            android:id="@+id/layout_table"
+            android:layout_width="700dp"
+            android:layout_height="400dp"
+            android:gravity="center"
+            android:layout_weight="1">
+
+            <TableRow android:background="@drawable/border"
+                android:gravity="center"
+                >
+
+                <TextView
+                    android:id="@+id/label_classroom"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:text="@string/label.numberClass.presence"
+                    android:textSize="60sp"
+                    android:textStyle="bold" />
+            </TableRow>
+
+            <TableRow
+                android:background="@drawable/border"
+                android:gravity="center"
+                android:layout_height="match_parent"
+                android:layout_width="200dp">
+
+                <TextView
+                    android:id="@+id/txtAula"
+                    android:gravity="center"
+                    android:hint="@string/hint.numberClass.presence"
+                    android:textColor="#000"
+                    android:textSize="100sp"
+                    android:textStyle="bold" />
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
 </RelativeLayout>

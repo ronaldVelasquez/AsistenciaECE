@@ -17,6 +17,7 @@ public class SessionManager {
     public static final String KEY_IDROL = "idRol";
     public static final String KEY_ESTADO = "estado";
     public static final String KEY_PASSWORD = "password";
+    public static final String KEY_ID_LOCAL = "id_local";
 
     public SessionManager(Context context) {
         this.context = context;
@@ -24,13 +25,14 @@ public class SessionManager {
         editor = sharedPreferences.edit();
     }
 
-    public void createLoginSession(String usuario, int idUsu, int idRol, String estado, String password){
+    public void createLoginSession(String usuario, int idUsu, int idRol, String estado, String password, int id_local){
         editor.putBoolean(IS_LOGIN, true);
         editor.putString(KEY_USUARIO, usuario);
         editor.putInt(KEY_IDUSU, idUsu);
         editor.putInt(KEY_IDROL, idRol);
         editor.putString(KEY_ESTADO, estado);
         editor.putString(KEY_PASSWORD, password);
+        editor.putInt(KEY_ID_LOCAL, id_local);
         editor.commit();
     }
 
@@ -54,6 +56,7 @@ public class SessionManager {
         user.put(KEY_IDROL, sharedPreferences.getInt(KEY_IDROL, 0));
         user.put(KEY_ESTADO, sharedPreferences.getString(KEY_ESTADO, null));
         user.put(KEY_PASSWORD, sharedPreferences.getString(KEY_PASSWORD, null));
+        user.put(KEY_ID_LOCAL, sharedPreferences.getInt(KEY_ID_LOCAL, 0));
         return user;
     }
 

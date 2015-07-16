@@ -69,4 +69,7 @@ public class VersionBusiness {
         return versionDao.getVersion().getNro_version();
     }
 
+    public void deleteVersion() {
+        versionDao.deleteVersion();
+    }
 }

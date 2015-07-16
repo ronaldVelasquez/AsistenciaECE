@@ -22,6 +22,7 @@ public class UserDao extends BaseDAO {
     }
 
     public boolean addUser(UserEntity userEntity) {
+        deleteUser();
         boolean flag;
         try {
             openDBHelper();
@@ -56,12 +57,12 @@ public class UserDao extends BaseDAO {
         return flag;
     }
 
-    public UserEntity searchUser(String password) {
+    public UserEntity searchUser(String password, String username) {
         UserEntity userEntity = new UserEntity();
         try {
             openDBHelper();
             Log.v(TAG, "Start seachUser");
-            SQL = "select * from usuario where clave like '" + password + "'";
+            SQL = "select * from usuario where clave like '" + password + "' and usuario like '" + username + "'";
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()) {
                 Log.v(TAG, "User found");
@@ -85,5 +86,19 @@ public class UserDao extends BaseDAO {
             closeDBHelper();
         }
         return userEntity;
+    }
+
+    public void deleteUser() {
+        try{
+            openDBHelper();
+            Log.v(TAG, "Start delete usuario");
+            dbHelper.getDatabase().delete( "usuario", null, null );
+        }catch (Exception e){
+            Log.e(TAG, "Error delete Usuario");
+            e.printStackTrace();
+        } finally {
+            closeDBHelper();
+            Log.v(TAG, "End delete Usuario");
+        }
     }
 }

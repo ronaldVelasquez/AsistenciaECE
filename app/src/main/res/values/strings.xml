@@ -1,18 +1,19 @@
 <resources>
     <string name="app_name">Asistencia ECE</string>
 
+    <!--Login Activity-->
     <string name="title.login">Sistema de Control de Asistencia</string>
     <string name="image.login.description">Logo de la institución</string>
     <string name="hint.edtx_password">Ingresar Contraseña</string>
+    <string name="hint.edtx_username">Ingresar usuario</string>
     <string name="btn.login">Ingresar</string>
     
-    
-    
+    <!--Padron Activity-->
     <string name="title_activity_padron">PadronActivity</string>
     <string name="img.description">Imagen de descarga de padron</string>
     <string name="title.padron">Descargar la nueva versión del padrón</string>
     
-    
+    <!--Main Activity-->
     <string name="title_activity_main">MainActivity</string>
     <string name="report.item">Reportes Locales</string>
     <string name="present.item">Asistencia</string>
@@ -20,10 +21,18 @@
     <string name="title.navHeader">Sistema de control de Asistencia</string>
     <string name="actions.settings">Configuraciones</string>
 
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!--Fragment Presence-->
     <string name="hint.edtx_dni">Ingrese el Nro de D.N.I.</string>
     <string name="hint.label.presence">Message</string>
+    <string name="label.name.presence">Apellidos y Nombres :</string>
+    <string name="hint.name.presence">Apellidos y Nombres</string>
+    <string name="label.cargo.presence">Cargo :</string>
+    <string name="hint.cargo.presence">Cargo</string>
+    <string name="label.location.presence">Local de Capacitación</string>
+    <string name="hint.location.presence">Local de Capacitación</string>
+    <string name="label.numberClass.presence">Nro de Aula</string>
+    <string name="hint.numberClass.presence">Nro</string>
+
 
 
 </resources>

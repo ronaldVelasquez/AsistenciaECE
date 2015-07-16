@@ -46,9 +46,9 @@ public class VersionDao extends BaseDAO {
     }
 
     public void addVersion(VersionEntity versionEntity){
+        deleteVersion();
         try{
             openDBHelper();
-            deleteVersion();
             Log.v(TAG, "Start addVersion");
             contentValues = new ContentValues();
             contentValues.put("nro_version", versionEntity.getNro_version());
@@ -68,14 +68,15 @@ public class VersionDao extends BaseDAO {
     }
     public void deleteVersion(){
         try{
+            openDBHelper();
             Log.v(TAG, "Start delete Version");
             dbHelper.getDatabase().delete( "version", null, null );
         }catch (Exception e){
             Log.e(TAG, "Error delete Version");
             e.printStackTrace();
-            cursor.close();
+        } finally {
             closeDBHelper();
+            Log.v(TAG, "End delete Version");
         }
-        Log.v(TAG, "End delete Version");
     }
 }

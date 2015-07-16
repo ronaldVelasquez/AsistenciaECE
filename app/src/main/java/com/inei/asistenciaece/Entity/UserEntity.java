@@ -8,18 +8,28 @@ public class UserEntity {
     private String estado;
     private String rol;
     private String descripcion;
+    private int id_local;
 
-    public UserEntity(String usuario, int idUsu, int idRol, String password, String estado, String rol, String descripcion) {
+    public UserEntity(String usuario, int idUsu, int idRol, String password, String estado, String rol, String descripcion, int id_local) {
         this.usuario = usuario;
         this.idUsu = idUsu;
         this.idRol = idRol;
         this.password = password;
         this.estado = estado;
         this.rol = rol;
+        this.id_local = id_local;
         this.descripcion = descripcion;
     }
 
     public UserEntity() {
+    }
+
+    public int getId_local() {
+        return id_local;
+    }
+
+    public void setId_local(int id_local) {
+        this.id_local = id_local;
     }
 
     public String getUsuario() {
