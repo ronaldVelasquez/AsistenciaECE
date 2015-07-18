@@ -41,7 +41,7 @@ public class LocalDao extends BaseDAO {
         } finally {
             cursor.close();
             closeDBHelper();
-            Log.e(TAG, "End getLocal");
+            Log.v(TAG, "End getLocal");
         }
         return localEntity;
     }

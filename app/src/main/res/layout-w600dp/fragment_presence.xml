@@ -63,9 +63,33 @@
                 >
 
                 <TextView
+                    android:id="@+id/label_dni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label.dni.presence"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:textColor="#000000"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/txt_dni"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_dni"
+                    android:hint="@string/hint.dni.presence"
+                    android:textSize="25sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
                     android:id="@+id/label_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_dni"
                     android:text="@string/label.name.presence"
                     android:textSize="25sp"
                     android:textStyle="bold"
@@ -81,6 +105,7 @@
                     android:layout_below="@id/label_name"
                     android:hint="@string/hint.name.presence"
                     android:textSize="25sp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"/>
 
@@ -103,6 +128,7 @@
                     android:layout_below="@id/label_cargo"
                     android:hint="@string/hint.cargo.presence"
                     android:textSize="25sp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     />
@@ -126,6 +152,7 @@
                     android:layout_below="@id/label_location"
                     android:hint="@string/hint.location.presence"
                     android:textSize="25sp"
+                    android:textStyle="bold"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"/>
             </RelativeLayout>

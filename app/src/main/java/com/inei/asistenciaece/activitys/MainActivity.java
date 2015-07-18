@@ -1,5 +1,6 @@
 package com.inei.asistenciaece.activitys;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -9,11 +10,11 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.inei.asistenciaece.Business.PadronBusiness;
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.SessionManager;
 import com.inei.asistenciaece.fragments.ConsolidatedFragment;
@@ -26,7 +27,7 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayout;
-    private String drawerTitle;
+
     private SessionManager sessionManager;
     private String password;
     private String username;
@@ -48,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
 
-        drawerTitle = getResources().getString(R.string.report_item);
+        String drawerTitle = getResources().getString(R.string.report_item);
         if (savedInstanceState == null) {
             selectItem(drawerTitle);
         }
@@ -66,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
             ab.setHomeAsUpIndicator(R.drawable.ic_menu);
             ab.setDisplayHomeAsUpEnabled(true);
         }
-
     }
 
     private void setupDrawerContent(NavigationView navigationView) {
@@ -79,7 +79,14 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         // Crear nuevo fragmento
                         String title = menuItem.getTitle().toString();
-                        selectItem(title);
+                        if (title.equals(getString(R.string.close_session_item))){
+                            sessionManager.logoutUser();
+                            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                            startActivity(intent);
+                        } else {
+                            selectItem(title);
+                        }
                         return true;
                     }
                 }
@@ -101,7 +108,11 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
-                return true;
+                break;
+            case R.id.action_sync:
+                PadronBusiness padronBusiness = new PadronBusiness(this);
+                padronBusiness.syncDataManual();
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -110,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         // Enviar título como arguemento del fragmento
         Bundle args = new Bundle();
         FragmentManager fragmentManager = getSupportFragmentManager();
-        Fragment fragment = null;
+        Fragment fragment;
         switch (title){
             case "Reportes Locales":
                 args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
@@ -136,24 +147,12 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
         fragmentManager.beginTransaction().replace(R.id.main_content, fragment).commit();
-        /*args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
-        Fragment fragment = ReportFragment.newInstance(title);
-        fragment.setArguments(args);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager
-                .beginTransaction()
-                .replace(R.id.main_content, fragment)
-                .commit();*/
         drawerLayout.closeDrawers(); // Cerrar drawer
         setTitle(title); // Setear título actual
     }
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-
-        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
+        return keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0 || super.onKeyDown(keyCode, event);
     }
 }

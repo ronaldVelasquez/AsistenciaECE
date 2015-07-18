@@ -24,6 +24,7 @@ public class PresenceFragment extends Fragment {
     private TextView txtName;
     private TextView txtCargo;
     private TextView txtLocation;
+    private TextView txtDni;
     private TextView txtClassroom;
     private String dni;
 
@@ -67,15 +68,12 @@ public class PresenceFragment extends Fragment {
         });
 
         labelMessage = (TextView) view.findViewById(R.id.label_message);
-        labelMessage.setText("");
+        txtDni = (TextView) view.findViewById(R.id.txt_dni);
         txtName = (TextView) view.findViewById(R.id.txt_name);
-        txtName.setText("");
         txtCargo = (TextView) view.findViewById(R.id.txt_cargo);
-        txtCargo.setText("");
         txtLocation = (TextView) view.findViewById(R.id.txt_location);
-        txtLocation.setText("");
         txtClassroom = (TextView) view.findViewById(R.id.txt_classroom);
-        txtClassroom.setText("");
+        clearDataShow();
         return view;
     }
 
@@ -87,11 +85,12 @@ public class PresenceFragment extends Fragment {
         TextView txtMesssage = (TextView) getActivity().findViewById(R.id.label_message);
         switch (postulanteEntity.getM1_estado()){
             case 0:
-                message = "Se registró correctamente";
+                message = "Se registrÃ³ correctamente";
                 view.setBackgroundColor(getResources().getColor(R.color.correct));
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.correct));
                 txtMesssage.setText(message);
+                fillDataShow(postulanteEntity);
                 break;
             case 1: case 2:
                 message = "El postulante ya fue registrado";
@@ -99,6 +98,7 @@ public class PresenceFragment extends Fragment {
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.warning));
                 txtMesssage.setText(message);
+                fillDataShow(postulanteEntity);
                 break;
             case 3:
                 message = "El postulante no pertenece al local";
@@ -106,6 +106,7 @@ public class PresenceFragment extends Fragment {
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.error_postulante));
                 txtMesssage.setText(message);
+                clearDataShow();
                 break;
             case 4:
                 message = "Error";
@@ -113,6 +114,7 @@ public class PresenceFragment extends Fragment {
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.error_postulante));
                 txtMesssage.setText(message);
+                clearDataShow();
                 break;
         }
 
@@ -125,6 +127,23 @@ public class PresenceFragment extends Fragment {
     private String getLocal(int id_local){
         LocalBusiness localBusiness = new LocalBusiness(getActivity().getApplicationContext());
         return localBusiness.getLocal(id_local);
+    }
+
+    private void fillDataShow(PostulanteEntity postulanteEntity){
+        txtDni.setText(postulanteEntity.getDni());
+        txtName.setText(postulanteEntity.getApe_nom());
+        txtCargo.setText(getCargo(postulanteEntity.getId_cargo()));
+        txtLocation.setText(getLocal(postulanteEntity.getId_local()));
+        txtClassroom.setText(postulanteEntity.getNro_aula());
+    }
+
+    private void clearDataShow(){
+        txtName.setText("");
+        txtDni.setText("");
+        txtCargo.setText("");
+        txtLocation.setText("");
+        txtClassroom.setText("");
+
     }
 
 }

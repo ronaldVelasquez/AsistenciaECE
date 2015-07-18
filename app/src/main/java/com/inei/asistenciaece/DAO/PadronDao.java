@@ -6,11 +6,14 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.inei.asistenciaece.Entity.CargoEntity;
+import com.inei.asistenciaece.Entity.DataEntity;
 import com.inei.asistenciaece.Entity.LocalEntity;
 import com.inei.asistenciaece.Entity.PadronEntity;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
 import com.inei.asistenciaece.Entity.RolEntity;
 import com.inei.asistenciaece.Entity.VersionEntity;
+
+import java.util.ArrayList;
 
 public class PadronDao extends BaseDAO {
 
@@ -58,9 +61,9 @@ public class PadronDao extends BaseDAO {
             }
 
 //            Insert local
-            if (!padronEntity.getLocal().isEmpty()){
+            if (!padronEntity.getLocal().isEmpty()) {
                 Log.v(TAG, "Insert local");
-                for (LocalEntity localEntity : padronEntity.getLocal()){
+                for (LocalEntity localEntity : padronEntity.getLocal()) {
                     contentValues = new ContentValues();
                     contentValues.put("id_local", localEntity.getId_local());
                     contentValues.put("nombre_local", localEntity.getNombre_local());
@@ -72,9 +75,9 @@ public class PadronDao extends BaseDAO {
             }
 
 //            Insert cargo
-            if (!padronEntity.getCargo().isEmpty()){
+            if (!padronEntity.getCargo().isEmpty()) {
                 Log.v(TAG, "Insert cargo");
-                for (CargoEntity cargoEntity : padronEntity.getCargo()){
+                for (CargoEntity cargoEntity : padronEntity.getCargo()) {
                     contentValues = new ContentValues();
                     contentValues.put("id_cargo", cargoEntity.getId_cargo());
                     contentValues.put("cargo", cargoEntity.getCargo());
@@ -88,9 +91,9 @@ public class PadronDao extends BaseDAO {
             }
 
 //            Insert Rol
-            if (!padronEntity.getRol().isEmpty()){
+            if (!padronEntity.getRol().isEmpty()) {
                 Log.v(TAG, "Insert rol");
-                for (RolEntity rolEntity: padronEntity.getRol()){
+                for (RolEntity rolEntity : padronEntity.getRol()) {
                     contentValues = new ContentValues();
                     contentValues.put("idRol", rolEntity.getIdRol());
                     contentValues.put("rol", rolEntity.getRol());
@@ -122,17 +125,78 @@ public class PadronDao extends BaseDAO {
         return flag;
     }
 
-    public void deletePadron(){
-        try{
+    public void deletePadron() {
+        try {
             Log.v(TAG, "Star delete Padron");
             dbHelper.getDatabase().delete("version", null, null);
             dbHelper.getDatabase().delete("postulante", null, null);
             dbHelper.getDatabase().delete("rol", null, null);
             dbHelper.getDatabase().delete("cargo", null, null);
             dbHelper.getDatabase().delete("local", null, null);
-        } catch (Exception ex){
+        } catch (Exception ex) {
             ex.printStackTrace();
             Log.e(TAG, "Error when deleted padron");
+            closeDBHelper();
+        }
+    }
+
+    public ArrayList<PostulanteEntity> getPadronSync() {
+        ArrayList<PostulanteEntity> arrayPostulates = new ArrayList<>();
+        Log.v(TAG, "Start get PadronSync");
+        try {
+            openDBHelper();
+            SQL = "select * from postulante where m1_estado like " + 1;
+            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()) {
+                while (!cursor.isAfterLast()) {
+                    PostulanteEntity postulanteEntity = new PostulanteEntity();
+                    postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
+                    postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
+                    postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
+                    postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
+                    postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
+                    postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m1_estado")));
+                    postulanteEntity.setLugar_asigna(cursor.getString(cursor.getColumnIndex("lugar_asigna")));
+                    postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m1_fecha")));
+                    arrayPostulates.add(postulanteEntity);
+                    cursor.moveToNext();
+                }
+            } else {
+                Log.v(TAG, "Not found postulantes");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            Log.e(TAG, "Error when search postulante");
+        } finally {
+            Log.v(TAG, "End getPadronSync");
+            cursor.close();
+            closeDBHelper();
+        }
+        return arrayPostulates;
+    }
+
+    public void setDataSync(DataEntity dataEntity) {
+        Log.v(TAG, "Start setDatasync");
+        try{
+            openDBHelper();
+            if (!dataEntity.getPostulantes().isEmpty()){
+                for(PostulanteEntity postulanteEntity : dataEntity.getPostulantes()){
+                    contentValues = new ContentValues();
+                    contentValues.put("m1_estado", postulanteEntity.getM1_estado());
+                    String where = "dni like '" + postulanteEntity.getDni() + "'";
+                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
+                }
+                dbHelper.setTransactionSuccessful();
+            } else {
+                Log.v(TAG, "Not found data");
+            }
+
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Log.e(TAG, "Error when set data");
+        } finally {
+            Log.v(TAG, "End setDataSync");
+            cursor.close();
             closeDBHelper();
         }
     }

@@ -7,6 +7,9 @@ import android.util.Log;
 
 import com.inei.asistenciaece.Entity.PostulanteEntity;
 import com.inei.asistenciaece.Utils.DateFormatUtil;
+import com.inei.asistenciaece.Utils.ReportItem;
+
+import java.util.ArrayList;
 
 public class PostulanteDao extends BaseDAO{
 
@@ -64,5 +67,26 @@ public class PostulanteDao extends BaseDAO{
             closeDBHelper();
         }
         return postulanteEntity;
+    }
+
+    public ArrayList<ReportItem> getReport() {
+        ArrayList<ReportItem> reportItems = new ArrayList<>();
+        try {
+            openDBHelper();
+            SQL = "select distinct nro_aula from postulante";
+            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()){
+                while (!cursor.isAfterLast()){
+                    ReportItem reportItem = new ReportItem();
+                    String nroAula = cursor.getString(cursor.getColumnIndex("nro_aula"));
+                }
+            }
+        } catch (Exception ex){
+
+        }finally {
+            cursor.close();
+            closeDBHelper();
+        }
+        return reportItems;
     }
 }

@@ -25,7 +25,7 @@ public class CargoDao extends BaseDAO {
         CargoEntity cargoEntity = new CargoEntity();
         try{
             openDBHelper();
-            SQL = "select * from caego where id_cargo like " + id_cargo;
+            SQL = "select * from cargo where id_cargo like " + id_cargo;
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if(cursor.moveToFirst()){
                 Log.v(TAG, "Cargo found");
@@ -43,7 +43,7 @@ public class CargoDao extends BaseDAO {
         } finally {
             cursor.close();
             closeDBHelper();
-            Log.e(TAG, "End getCargo");
+            Log.v(TAG, "End getCargo");
         }
         return cargoEntity;
     }

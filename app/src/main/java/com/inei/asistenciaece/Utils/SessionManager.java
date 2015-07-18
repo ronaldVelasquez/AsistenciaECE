@@ -71,7 +71,7 @@ public class SessionManager {
         context.startActivity(intent);*/
     }
 
-    /*public boolean isLoggedIn() {
+    public boolean isLoggedIn() {
         return sharedPreferences.getBoolean(IS_LOGIN, false);
-    }*/
+    }
 }

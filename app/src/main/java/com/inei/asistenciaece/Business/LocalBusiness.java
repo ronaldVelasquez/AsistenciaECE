@@ -18,7 +18,7 @@ public class LocalBusiness {
     public String getLocal(int id_local) {
         LocalEntity localEntity = localDao.getLocal(id_local);
         String localName;
-        if(!localEntity.getNombre_local().isEmpty()){
+        if(localEntity.getNombre_local().isEmpty()){
             localName = "Sin Local";
         } else {
             localName = localEntity.getNombre_local();

@@ -18,6 +18,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.inei.asistenciaece.Business.PadronBusiness;
 import com.inei.asistenciaece.Business.UserBusiness;
 import com.inei.asistenciaece.Business.VersionBusiness;
 import com.inei.asistenciaece.DAO.PadronDao;
@@ -69,22 +70,15 @@ public class PadronActivity extends Activity {
                         Gson gson = new Gson();
                         try {
                             PadronEntity padronEntity = gson.fromJson(jsonObject.getJSONObject("padron").toString(), PadronEntity.class);
-                            PadronDao padronDao = new PadronDao(getApplicationContext());
-                            boolean flag = padronDao.addPadron(padronEntity);
+                            PadronBusiness padronBusiness = new PadronBusiness(PadronActivity.this);
+                            padronBusiness.addPadron(padronEntity);
                             progressDialog.dismiss();
-                            if (flag) {
-                                Intent intent = new Intent(PadronActivity.this, MainActivity.class);
-                                startActivity(intent);
-                            } else {
-                                Toast.makeText(PadronActivity.this, "Error al almacenar datos de manera local", Toast.LENGTH_SHORT).show();
-                            }
                         } catch (Exception ex) {
                             ex.printStackTrace();
                             Toast.makeText(PadronActivity.this, "Error al almacenar datos de manera local", Toast.LENGTH_SHORT).show();
                             Log.e(TAG, "Error parsing json");
                             progressDialog.dismiss();
                         }
-
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -109,6 +103,7 @@ public class PadronActivity extends Activity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        sessionManager.logoutUser();
         VersionBusiness versionBusiness = new VersionBusiness(getApplicationContext());
         versionBusiness.deleteVersion();
         UserBusiness userBusiness = new UserBusiness(getApplicationContext());

@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.inei.asistenciaece" >
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/Theme.ECE" >
+        android:theme="@style/Theme.ECE"
+        android:name=".AsistenciaApplication">
         <activity
             android:name=".activitys.LoginActivity"
             android:label="@string/app_name"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,13 +23,16 @@
         <activity
             android:name=".activitys.PadronActivity"
             android:label="@string/title_activity_padron"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name=".activitys.MainActivity"
             android:label="@string/title_activity_main"
-            android:screenOrientation="landscape">
+            android:screenOrientation="landscape" >
         </activity>
+        <service android:name=".service.SyncService"
+            />
+
     </application>
 
 </manifest>

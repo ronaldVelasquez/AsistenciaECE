@@ -10,18 +10,6 @@
     android:padding="@dimen/header_left_padding"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
-    <!-- Imagen de perfil -->
-   <!-- <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/circle_image"
-        android:layout_width="@dimen/profile_image_size"
-        android:layout_height="@dimen/profile_image_size"
-        android:layout_marginBottom="16dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/profile_picture"
-        app:border_color="@android:color/white"
-        app:border_width="1dp" />-->
-
-    <!-- Nombre de Usuario -->
     <TextView
         android:id="@+id/label_app_name"
         android:layout_width="match_parent"
@@ -37,7 +25,6 @@
         android:id="@+id/view"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
-        android:layout_below="@+id/label_app_name"
         android:background="@color/bright_foreground_disabled_material_light" />
 
     <!-- Correo de la cuenta -->

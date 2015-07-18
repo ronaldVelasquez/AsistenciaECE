@@ -2,6 +2,7 @@ package com.inei.asistenciaece.activitys;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.inei.asistenciaece.Business.UserBusiness;
 import com.inei.asistenciaece.Entity.UserEntity;
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.ConstantsUtils;
+import com.inei.asistenciaece.Utils.SessionManager;
+
 import org.json.JSONObject;
 import java.util.HashMap;
 
@@ -37,6 +40,12 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SessionManager sessionManager = new SessionManager(getApplicationContext());
+        if (sessionManager.isLoggedIn()){
+            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
         btnLogin = (Button) findViewById(R.id.btn_login);
         edtxPassword = (EditText) findViewById(R.id.edtx_password);
         edtxUsername = (EditText) findViewById(R.id.edtx_username);
@@ -52,11 +61,10 @@ public class LoginActivity extends Activity {
                 } else {
                     Log.v(TAG, "Send Password and Send username");
                     progressDialog = new ProgressDialog(LoginActivity.this);
+                    progressDialog.setIcon(R.drawable.abc_item_background_holo_dark);
                     progressDialog.setTitle("Espere un momento...");
                     progressDialog.setMessage("Validando la sesión");
-
                     sendRequest(password, username);
-
                 }
             }
         });

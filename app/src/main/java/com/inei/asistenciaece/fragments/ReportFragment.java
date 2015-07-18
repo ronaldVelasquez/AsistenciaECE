@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.inei.asistenciaece.R;
@@ -30,9 +31,12 @@ public class ReportFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_report, container, false);
-        String title = getArguments().getString(ARG_SECTION_TITLE);
+
+        /*String title = getArguments().getString(ARG_SECTION_TITLE);
         TextView titulo = (TextView) view.findViewById(R.id.title);
-        titulo.setText(title);
+        titulo.setText(title);*/
+
+
         return view;
     }
 }
