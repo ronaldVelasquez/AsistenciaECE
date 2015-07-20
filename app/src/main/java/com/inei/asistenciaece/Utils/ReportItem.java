@@ -2,12 +2,12 @@ package com.inei.asistenciaece.Utils;
 
 public class ReportItem {
     private String nroClasses;
-    private String nroAsign;
-    private String nroRegister;
-    private String nroNoRegister;
-    private String nroSync;
+    private int nroAsign;
+    private int nroRegister;
+    private int nroNoRegister;
+    private int nroSync;
 
-    public ReportItem(String nroClasses, String nroAsign, String nroRegister, String nroNoRegister, String nroSync) {
+    public ReportItem(String nroClasses, int nroAsign, int nroRegister, int nroNoRegister, int nroSync) {
         this.nroClasses = nroClasses;
         this.nroAsign = nroAsign;
         this.nroRegister = nroRegister;
@@ -26,35 +26,35 @@ public class ReportItem {
         this.nroClasses = nroClasses;
     }
 
-    public String getNroAsign() {
+    public int getNroAsign() {
         return nroAsign;
     }
 
-    public void setNroAsign(String nroAsign) {
+    public void setNroAsign(int nroAsign) {
         this.nroAsign = nroAsign;
     }
 
-    public String getNroRegister() {
+    public int getNroRegister() {
         return nroRegister;
     }
 
-    public void setNroRegister(String nroRegister) {
+    public void setNroRegister(int nroRegister) {
         this.nroRegister = nroRegister;
     }
 
-    public String getNroNoRegister() {
+    public int getNroNoRegister() {
         return nroNoRegister;
     }
 
-    public void setNroNoRegister(String nroNoRegister) {
+    public void setNroNoRegister(int nroNoRegister) {
         this.nroNoRegister = nroNoRegister;
     }
 
-    public String getNroSync() {
+    public int getNroSync() {
         return nroSync;
     }
 
-    public void setNroSync(String nroSync) {
+    public void setNroSync(int nroSync) {
         this.nroSync = nroSync;
     }
 }
