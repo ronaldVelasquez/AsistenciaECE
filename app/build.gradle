@@ -21,8 +21,10 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:design:22.2.0'
     compile 'com.android.support:appcompat-v7:22.2.0'
+    compile 'com.android.support:cardview-v7:21.0.3'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile 'com.android.support:design:22.2.0'
     compile 'com.mcxiaoke.volley:library:1.0.+@aar'
     compile 'com.google.code.gson:gson:2.3.1'
     compile 'com.rengwuxian.materialedittext:library:2.1.4'

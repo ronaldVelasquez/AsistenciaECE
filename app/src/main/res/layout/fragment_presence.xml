@@ -6,7 +6,7 @@
     tools:context="com.inei.asistenciaece.fragments.PresenceFragment">
 
 
-    <com.rengwuxian.materialedittext.MaterialEditText
+    <EditText
         android:id="@+id/edtx_dni"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -16,13 +16,13 @@
         android:hint="@string/hint.edtx_dni"
         android:inputType="number"
         android:maxLength="10"
-        android:textSize="20sp"
-        app:met_baseColor="@color/primary.dark"
+        android:textSize="20sp"/>
+        <!--app:met_baseColor="@color/primary.dark"
         app:met_errorColor="@color/error"
         app:met_floatingLabel="highlight"
         app:met_maxCharacters="8"
         app:met_primaryColor="@color/primary"
-        app:met_textColorHint="@color/hint" />
+        app:met_textColorHint="@color/hint" -->
 
     <TextView
         android:id="@+id/label_message"

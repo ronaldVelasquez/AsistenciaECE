@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
 
-        String drawerTitle = getResources().getString(R.string.report_item);
+        String drawerTitle = getResources().getString(R.string.present_item);
         if (savedInstanceState == null) {
             selectItem(drawerTitle);
         }
@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            getMenuInflater().inflate(R.menu.menu_main, menu);
+            //getMenuInflater().inflate(R.menu.menu_main, menu);
             return true;
         }
         return super.onCreateOptionsMenu(menu);
@@ -108,10 +108,6 @@ public class MainActivity extends AppCompatActivity {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
                 break;
-            case R.id.action_sync:
-                PadronBusiness padronBusiness = new PadronBusiness(this);
-                padronBusiness.syncDataManual();
-                break;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -122,14 +118,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
         switch (title){
-            case "Reportes Locales":
-                args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
-                fragment = ReportFragment.newInstance(title);
-                fragment.setArguments(args);
-                break;
             case "Asistencia":
                 args.putString(com.inei.asistenciaece.fragments.PresenceFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceFragment.newInstance(title);
+                fragment.setArguments(args);
+                break;
+            case "Reportes":
+                args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
+                fragment = ReportFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
             case "Consolidado":

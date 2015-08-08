@@ -17,12 +17,17 @@
         android:inputType="number"
         android:maxLength="10"
         android:textSize="20sp"
+        app:met_validateOnFocusLost="true"
         app:met_baseColor="@color/primary.dark"
         app:met_errorColor="@color/error"
         app:met_floatingLabel="highlight"
         app:met_maxCharacters="8"
         app:met_primaryColor="@color/primary"
-        app:met_textColorHint="@color/hint" />
+        app:met_textColorHint="@color/hint"
+        android:nextFocusDown="@+id/edtx_dni"
+        >
+        <requestFocus />
+        </com.rengwuxian.materialedittext.MaterialEditText>
 
     <TextView
         android:id="@+id/label_message"
@@ -50,6 +55,7 @@
         android:layout_below="@+id/view"
         android:baselineAligned="false"
         android:orientation="horizontal"
+        android:focusable="false"
         android:id="@+id/layout_postulante"
         >
         <ScrollView

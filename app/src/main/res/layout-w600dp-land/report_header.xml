@@ -1,74 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="?attr/colorPrimaryDark"
-    android:gravity="bottom"
+    android:background="?attr/colorPrimary"
+    android:gravity="top"
     >
-    <TextView
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="@string/label.nro_class.header"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:gravity="center">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="@string/label.nro_class.header"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="@string/label.total.header"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="@string/label.total.header"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="@string/label.register.header"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="@string/label.register.header"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="@string/label.no_register.header"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="18sp"
+            android:text="@string/label.no_register.header"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:text="@string/label.sync.header"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold"/>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="@string/label.sync.header"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
-</LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>

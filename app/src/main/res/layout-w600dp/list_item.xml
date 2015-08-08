@@ -1,79 +1,90 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:id="@+id/cardview_report"
     android:gravity="bottom"
+    app:cardCornerRadius="3dp"
+    app:cardElevation="2dp"
+    app:cardUseCompatPadding="true"
     android:background="@color/background_floating_material_light"
     >
-    <TextView
-        android:id="@+id/txt_nro_classes"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:hint="@string/label.nro_class.header"
-        android:gravity="center"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:textColor="@color/primary_material_dark"
-        android:textStyle="bold"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/txt_nro_classes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:hint="@string/label.nro_class.header"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:textColor="@color/primary_material_dark"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/txt_nro_asign"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:hint="@string/label.total.header"
-        android:gravity="center"
-        android:textColor="@color/primary.dark"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_nro_asign"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:hint="@string/label.total.header"
+            android:gravity="center"
+            android:textColor="@color/primary.dark"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/txt_nro_register"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:hint="@string/label.register.header"
-        android:gravity="center"
-        android:textColor="@color/primary"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_nro_register"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:hint="@string/label.register.header"
+            android:gravity="center"
+            android:textColor="@color/primary"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/txt_no_register"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:hint="@string/label.no_register.header"
-        android:gravity="center"
-        android:textColor="@color/error"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_no_register"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:hint="@string/label.no_register.header"
+            android:gravity="center"
+            android:textColor="@color/error"
+            android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/txt_nro_sync"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:hint="@string/label.sync.header"
-        android:gravity="center"
-        android:textColor="@color/correct"
-        android:textStyle="bold"/>
+        <TextView
+            android:id="@+id/txt_nro_sync"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="4dp"
+            android:paddingRight="4dp"
+            android:hint="@string/label.sync.header"
+            android:gravity="center"
+            android:textColor="@color/correct"
+            android:textStyle="bold"/>
+    </LinearLayout>
 
-</LinearLayout>
+
+</android.support.v7.widget.CardView>

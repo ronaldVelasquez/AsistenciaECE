@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">Asistencia ECE</string>
+    <string name="app_name">Asistencia ECE 2015</string>
 
     <!--Login Activity-->
     <string name="title.login">Sistema de Control de Asistencia</string>
+    <string name="subtitle.login">Evaluación Censal de Estudiantes 2015</string>
     <string name="image.login.description">Logo de la institución</string>
     <string name="hint.edtx_password">Ingresar Contraseña</string>
     <string name="hint.edtx_username">Ingresar usuario</string>
@@ -14,8 +15,8 @@
     <string name="title.padron">Descargar la nueva versión del padrón</string>
     
     <!--Main Activity-->
-    <string name="title_activity_main">MainActivity</string>
-    <string name="report.item">Reportes Locales</string>
+    <string name="title_activity_main">Reportes</string>
+    <string name="report.item">Reportes</string>
     <string name="present.item">Asistencia</string>
     <string name="solid.item">Consolidado</string>
     <string name="title.navHeader">Sistema de control de Asistencia</string>
@@ -39,9 +40,13 @@
 
     <!--Fragment Report-->
     <string name="label.nro_class.header">Nro Aula</string>
-    <string name="label.total.header">Nro. Asignados</string>
-    <string name="label.register.header">Nro Registrados</string>
-    <string name="label.no_register.header">Nro No Registrados</string>
-    <string name="label.sync.header">Nro Sincronizados</string>
+    <string name="label.total.header">Asignados</string>
+    <string name="label.register.header">Registrados</string>
+    <string name="label.no_register.header">No Registrados</string>
+    <string name="label.sync.header">Sincronizados</string>
+    <string name="title_activity_report_detail">ReportDetailActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

@@ -6,6 +6,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.inei.asistenciaece.Business.PadronBusiness;
+import com.inei.asistenciaece.fragments.ReportFragment;
+import com.inei.asistenciaece.listeners.BudaCallback;
 
 public class SyncService extends Service {
     private static final String TAG = SyncService.class.getSimpleName();
@@ -59,7 +61,16 @@ public class SyncService extends Service {
             while (syncService.runFlag) {
                 try {
                     Log.v(TAG, "SyncService running");
-                    padronBusiness.syncData();
+                    padronBusiness.syncData(new BudaCallback() {
+                        @Override
+                        public void callback() {
+                            try {
+                                ReportFragment.showReport();
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
                     Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();

@@ -61,7 +61,7 @@ public class PadronActivity extends Activity {
 //                Create parameters
                 HashMap<String, Integer> parameters = new HashMap<String, Integer>();
                 parameters.put("idLocal", idLocal);
-
+                Log.e("adas", "" + idLocal);
                 RequestQueue requestQueue = Volley.newRequestQueue(PadronActivity.this);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ConstantsUtils.URL_PADRON, new JSONObject(parameters), new Response.Listener<JSONObject>() {
                     @Override
@@ -86,9 +86,9 @@ public class PadronActivity extends Activity {
                         progressDialog.dismiss();
                         Log.e(TAG, volleyError.toString());
                         if (volleyError instanceof NoConnectionError){
-                            Toast.makeText(PadronActivity.this, "No hay conexi�n a Internet", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PadronActivity.this, "No hay conexión a Internet", Toast.LENGTH_SHORT).show();
                         } else if (volleyError instanceof NetworkError) {
-                            Toast.makeText(PadronActivity.this, "No hay una buena conexi�n de Internet, Intentelo nuevamente", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(PadronActivity.this, "No hay una buena conexión de Internet, Intentelo nuevamente", Toast.LENGTH_SHORT).show();
                         } else {
                             Toast.makeText(PadronActivity.this, "Error al obtener los datos de la nube ", Toast.LENGTH_SHORT).show();
                         }

@@ -7,6 +7,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -43,8 +44,16 @@ public class PresenceFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_presence, container, false);
-
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         edtxDni = (EditText) view.findViewById(R.id.edtx_dni);
+        labelMessage = (TextView) view.findViewById(R.id.label_message);
+        txtDni = (TextView) view.findViewById(R.id.txt_dni);
+        txtName = (TextView) view.findViewById(R.id.txt_name);
+        txtCargo = (TextView) view.findViewById(R.id.txt_cargo);
+        txtLocation = (TextView) view.findViewById(R.id.txt_location);
+        txtClassroom = (TextView) view.findViewById(R.id.txt_classroom);
+        clearDataShow();
+        edtxDni.setFocusable(true);
         edtxDni.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -66,14 +75,7 @@ public class PresenceFragment extends Fragment {
                 }
             }
         });
-
-        labelMessage = (TextView) view.findViewById(R.id.label_message);
-        txtDni = (TextView) view.findViewById(R.id.txt_dni);
-        txtName = (TextView) view.findViewById(R.id.txt_name);
-        txtCargo = (TextView) view.findViewById(R.id.txt_cargo);
-        txtLocation = (TextView) view.findViewById(R.id.txt_location);
-        txtClassroom = (TextView) view.findViewById(R.id.txt_classroom);
-        clearDataShow();
+        edtxDni.requestFocus();
         return view;
     }
 
@@ -117,7 +119,6 @@ public class PresenceFragment extends Fragment {
                 clearDataShow();
                 break;
         }
-
     }
     private String getCargo(int id_cargo){
         CargoBusiness cargoBusiness = new CargoBusiness(getActivity().getApplicationContext());
@@ -143,7 +144,6 @@ public class PresenceFragment extends Fragment {
         txtCargo.setText("");
         txtLocation.setText("");
         txtClassroom.setText("");
-
     }
 
 }

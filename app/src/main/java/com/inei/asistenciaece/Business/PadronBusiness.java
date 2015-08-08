@@ -19,6 +19,7 @@ import com.inei.asistenciaece.Entity.PadronEntity;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
 import com.inei.asistenciaece.Utils.ConstantsUtils;
 import com.inei.asistenciaece.activitys.MainActivity;
+import com.inei.asistenciaece.listeners.BudaCallback;
 
 import org.json.JSONObject;
 
@@ -52,7 +53,7 @@ public class PadronBusiness {
 
     }
 
-    public void syncData() {
+    public void syncData(final BudaCallback budaCallback) {
         ArrayList<PostulanteEntity> arrayPostulantes = padronDao.getPadronSync();
         if (arrayPostulantes.isEmpty()) {
             Log.v(TAG, "Data Not found");
@@ -70,6 +71,9 @@ public class PadronBusiness {
                         Log.v(TAG, "json: " + jsonObject.toString());
                         DataEntity dataEntity1 = gson.fromJson(jsonObject.toString(), DataEntity.class);
                         padronDao.setDataSync(dataEntity1);
+                        if (budaCallback != null){
+                            budaCallback.callback();
+                        }
                     }
                 }, new Response.ErrorListener() {
                     @Override
@@ -85,7 +89,7 @@ public class PadronBusiness {
         }
     }
 
-    public void syncDataManual() {
+    public void syncDataManual(final BudaCallback budaCallback) {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Enviando Datos");
         ArrayList<PostulanteEntity> arrayPostulantes = padronDao.getPadronSync();
@@ -108,6 +112,10 @@ public class PadronBusiness {
                         padronDao.setDataSync(dataEntity1);
                         progressDialog.dismiss();
                         Toast.makeText(context, "Datos enviados correctamente", Toast.LENGTH_SHORT).show();
+
+                        if(budaCallback != null)
+                            budaCallback.callback();
+
                     }
                 }, new Response.ErrorListener() {
                     @Override
