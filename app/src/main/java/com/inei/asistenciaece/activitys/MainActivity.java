@@ -14,13 +14,13 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.inei.asistenciaece.Business.PadronBusiness;
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.SessionManager;
 import com.inei.asistenciaece.fragments.ConsolidatedFragment;
 import com.inei.asistenciaece.fragments.PresenceClassFragment;
 import com.inei.asistenciaece.fragments.PresenceFragment;
-import com.inei.asistenciaece.fragments.ReportFragment;
+import com.inei.asistenciaece.fragments.ReportLocalFragment;
+import com.inei.asistenciaece.fragments.ReportMainFragment;
 
 import java.util.HashMap;
 
@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 break;
             case "Reportes":
-                args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
-                fragment = ReportFragment.newInstance(title);
+                args.putString(ReportMainFragment.ARG_SECTION_TITLE, title);
+                fragment = ReportMainFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
             case "Consolidado":
@@ -142,8 +142,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 break;
             default:
-                args.putString(com.inei.asistenciaece.fragments.ReportFragment.ARG_SECTION_TITLE, title);
-                fragment = ReportFragment.newInstance(title);
+                args.putString(PresenceFragment.ARG_SECTION_TITLE, title);
+                fragment = PresenceFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
         }

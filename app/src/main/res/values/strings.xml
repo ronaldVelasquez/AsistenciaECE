@@ -15,7 +15,7 @@
     <string name="title.padron">Descargar la nueva versión del padrón</string>
     
     <!--Main Activity-->
-    <string name="title_activity_main">Reportes</string>
+    <string name="title_activity_main">Control de Asistencia</string>
     <string name="report.item">Reportes</string>
     <string name="present.item">Asistencia al Local</string>
     <string name="solid.item">Consolidado</string>
@@ -40,7 +40,7 @@
 
     <!--Fragment Report-->
     <string name="label.nro_class.header">Nro Aula</string>
-    <string name="label.total.header">Asignados</string>
+    <string name="label.total.header">Programados</string>
     <string name="label.register.header">Registrados</string>
     <string name="label.no_register.header">No Registrados</string>
     <string name="label.sync.header">Sincronizados</string>

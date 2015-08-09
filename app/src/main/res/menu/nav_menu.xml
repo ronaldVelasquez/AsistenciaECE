@@ -15,10 +15,10 @@
             android:id="@+id/nav_report"
             android:icon="@drawable/ic_description_black_24dp"
             android:title="@string/report.item"/>
-        <!--<item
+        <item
             android:id="@+id/nav_solid"
             android:icon="@drawable/ic_http_black_24dp"
-            android:title="@string/solid.item" />-->
+            android:title="@string/solid.item" />
         <item
             android:id="@+id/nav_close_session"
             android:icon="@drawable/ic_exit_to_app_black_24dp"

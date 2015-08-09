@@ -145,7 +145,7 @@ public class PadronDao extends BaseDAO {
         Log.v(TAG, "Start get PadronSync");
         try {
             openDBHelper();
-            SQL = "select * from postulante where m1_estado like " + 1;
+            SQL = "select * from postulante where m1_estado = " + 1 + " or m2_estado = " + 1;
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()) {
                 while (!cursor.isAfterLast()) {
@@ -156,8 +156,10 @@ public class PadronDao extends BaseDAO {
                     postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
                     postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
                     postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m1_estado")));
+                    postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m2_estado")));
                     postulanteEntity.setLugar_asigna(cursor.getString(cursor.getColumnIndex("lugar_asigna")));
                     postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m1_fecha")));
+                    postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m2_fecha")));
                     arrayPostulates.add(postulanteEntity);
                     cursor.moveToNext();
                 }
@@ -183,6 +185,7 @@ public class PadronDao extends BaseDAO {
                 for(PostulanteEntity postulanteEntity : dataEntity.getPostulantes()){
                     contentValues = new ContentValues();
                     contentValues.put("m1_estado", postulanteEntity.getM1_estado());
+                    contentValues.put("m2_estado", postulanteEntity.getM2_estado());
                     String where = "dni like '" + postulanteEntity.getDni() + "'";
                     dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
                 }

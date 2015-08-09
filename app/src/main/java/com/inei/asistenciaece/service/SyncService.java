@@ -6,7 +6,8 @@ import android.os.IBinder;
 import android.util.Log;
 
 import com.inei.asistenciaece.Business.PadronBusiness;
-import com.inei.asistenciaece.fragments.ReportFragment;
+import com.inei.asistenciaece.fragments.ReportClassesFragment;
+import com.inei.asistenciaece.fragments.ReportLocalFragment;
 import com.inei.asistenciaece.listeners.BudaCallback;
 
 public class SyncService extends Service {
@@ -65,7 +66,8 @@ public class SyncService extends Service {
                         @Override
                         public void callback() {
                             try {
-                                ReportFragment.showReport();
+                                ReportLocalFragment.showReport();
+                                ReportClassesFragment.showReport();
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

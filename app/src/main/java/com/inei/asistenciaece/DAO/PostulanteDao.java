@@ -111,7 +111,7 @@ public class PostulanteDao extends BaseDAO{
         return postulanteEntity;
     }
 
-    public ArrayList<ReportItem> getReport() {
+    public ArrayList<ReportItem> getReportLocal() {
         Log.v(TAG, "Start getReport");
         ArrayList<ReportItem> reportItems = new ArrayList<>();
         try {
@@ -122,6 +122,45 @@ public class PostulanteDao extends BaseDAO{
                     "ifnull((select count(nro_aula) from postulante where m1_estado IN(1,2) AND nro_aula=pos.nro_aula group by nro_aula),0) AS registrados, " +
                     "ifnull((select count(nro_aula)  from postulante where m1_estado=0 AND nro_aula=pos.nro_aula group by nro_aula),0) AS no_registrados, " +
                     "ifnull((select count(nro_aula) from postulante where m1_estado=2 AND nro_aula=pos.nro_aula group by nro_aula),0) AS sincronizados " +
+                    "from " +
+                    "postulante as pos " +
+                    "left join local as loc on pos.id_local=loc.id_local " +
+                    "group by pos.m1_estado,pos.nro_aula order by nro_aula";
+            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()){
+                while (!cursor.isAfterLast()){
+                    ReportItem reportItem = new ReportItem();
+                    reportItem.setNroClasses(cursor.getString(cursor.getColumnIndex("nro_aula")));
+                    reportItem.setNroAsign(cursor.getInt(cursor.getColumnIndex("totales")));
+                    reportItem.setNroRegister(cursor.getInt(cursor.getColumnIndex("registrados")));
+                    reportItem.setNroNoRegister(cursor.getInt(cursor.getColumnIndex("no_registrados")));
+                    reportItem.setNroSync(cursor.getInt(cursor.getColumnIndex("sincronizados")));
+                    reportItems.add(reportItem);
+                    cursor.moveToNext();
+                }
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Log.e(TAG, "Error when get Report");
+        }finally {
+            Log.v(TAG, "End getReport");
+            cursor.close();
+            closeDBHelper();
+        }
+        return reportItems;
+    }
+
+    public ArrayList<ReportItem> getReportClasses() {
+        Log.v(TAG, "Start getReport");
+        ArrayList<ReportItem> reportItems = new ArrayList<>();
+        try {
+            openDBHelper();
+            SQL = "select distinct " +
+                    "pos.nro_aula, " +
+                    "(select count(*) from postulante where nro_aula=pos.nro_aula group by nro_aula) AS totales, " +
+                    "ifnull((select count(nro_aula) from postulante where m2_estado IN(1,2) AND nro_aula=pos.nro_aula group by nro_aula),0) AS registrados, " +
+                    "ifnull((select count(nro_aula)  from postulante where m2_estado=0 AND nro_aula=pos.nro_aula group by nro_aula),0) AS no_registrados, " +
+                    "ifnull((select count(nro_aula) from postulante where m2_estado=2 AND nro_aula=pos.nro_aula group by nro_aula),0) AS sincronizados " +
                     "from " +
                     "postulante as pos " +
                     "left join local as loc on pos.id_local=loc.id_local " +

@@ -17,13 +17,12 @@ android:orientation="vertical">
 
     <include
         android:id="@+id/Header"
-            layout="@layout/report_header"
-        />
+        layout="@layout/report_header" />
+
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/list_report_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/list_report_item"
         android:padding="3dp"
-        android:scrollbars="vertical"
-        />
+        android:scrollbars="vertical" />
 </LinearLayout>

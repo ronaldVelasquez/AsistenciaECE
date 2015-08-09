@@ -8,4 +8,6 @@
     <color name="warning">#FFC107</color>
     <color name="correct">#009688</color>
     <color name="error_postulante">#FF8A80</color>
+    <color name="secondary_text">#E0E0E0</color>
+
 </resources>

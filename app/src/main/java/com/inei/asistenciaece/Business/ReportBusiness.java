@@ -18,7 +18,10 @@ public class ReportBusiness {
         postulanteDao = PostulanteDao.getInstance(context);
     }
 
-    public ArrayList<ReportItem> getReport(){
-        return postulanteDao.getReport();
+    public ArrayList<ReportItem> getReportLocal(){
+        return postulanteDao.getReportLocal();
+    }
+    public ArrayList<ReportItem> getReportClasses(){
+        return postulanteDao.getReportClasses();
     }
 }

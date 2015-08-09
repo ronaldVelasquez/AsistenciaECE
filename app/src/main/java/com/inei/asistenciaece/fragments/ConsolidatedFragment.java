@@ -38,8 +38,9 @@ public class ConsolidatedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_consolidated, container, false);
         webview = (WebView) view.findViewById(R.id.webView);
-        String postData = "user=" + ARG_USERNAME + "&password=" + ARG_PASSWORD;
-        webview.postUrl(ConstantsUtils.URL_CONSOLIDATED, EncodingUtils.getBytes(postData, "BASE64"));
+        /*String postData = "user=" + ARG_USERNAME + "&password=" + ARG_PASSWORD;
+        webview.postUrl(ConstantsUtils.URL_CONSOLIDATED, EncodingUtils.getBytes(postData, "BASE64"));*/
+        webview.loadUrl(ConstantsUtils.URL_CONSOLIDATED);
         webview.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
