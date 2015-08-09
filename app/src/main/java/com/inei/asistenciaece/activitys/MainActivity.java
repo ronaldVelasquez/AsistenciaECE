@@ -18,6 +18,7 @@ import com.inei.asistenciaece.Business.PadronBusiness;
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.SessionManager;
 import com.inei.asistenciaece.fragments.ConsolidatedFragment;
+import com.inei.asistenciaece.fragments.PresenceClassFragment;
 import com.inei.asistenciaece.fragments.PresenceFragment;
 import com.inei.asistenciaece.fragments.ReportFragment;
 
@@ -118,9 +119,14 @@ public class MainActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
         switch (title){
-            case "Asistencia":
+            case "Asistencia al Local":
                 args.putString(com.inei.asistenciaece.fragments.PresenceFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceFragment.newInstance(title);
+                fragment.setArguments(args);
+                break;
+            case "Asistencia en Aula":
+                args.putString(com.inei.asistenciaece.fragments.PresenceClassFragment.ARG_SECTION_TITLE, title);
+                fragment = PresenceClassFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
             case "Reportes":

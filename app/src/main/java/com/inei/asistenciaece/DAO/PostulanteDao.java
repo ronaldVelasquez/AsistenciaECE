@@ -69,6 +69,48 @@ public class PostulanteDao extends BaseDAO{
         return postulanteEntity;
     }
 
+    public PostulanteEntity checkPresence(String dni, String aula){
+        Log.v(TAG, "Star checkPrensence");
+        PostulanteEntity postulanteEntity = new PostulanteEntity();
+        try{
+            openDBHelper();
+            SQL = "select * from postulante where dni like '" + dni + "'" + "and nro_aula like '" + aula + "'";
+            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()){
+                postulanteEntity.setM2_estado(cursor.getInt(cursor.getColumnIndex("m2_estado")));
+                postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
+                postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
+                postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
+                postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
+                postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
+
+                if (postulanteEntity.getM2_estado() == 0){
+                    Log.v(TAG, "Checking Presence");
+                    contentValues = new ContentValues();
+                    contentValues.put("m2_estado", 1);
+                    contentValues.put("m2_fecha", DateFormatUtil.getDate());
+                    String where = "dni like '" + dni + "'";
+                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
+                    dbHelper.setTransactionSuccessful();
+                } else {
+                    Log.v(TAG, "Checked Presence");
+                }
+            } else {
+                postulanteEntity.setM2_estado(3);
+                Log.v(TAG, "Postulante not found");
+            }
+        } catch (Exception ex) {
+            postulanteEntity.setM2_estado(4);
+            ex.printStackTrace();
+            Log.e(TAG, "Error database");
+        } finally {
+            Log.v(TAG, "End checkPresence");
+            cursor.close();
+            closeDBHelper();
+        }
+        return postulanteEntity;
+    }
+
     public ArrayList<ReportItem> getReport() {
         Log.v(TAG, "Start getReport");
         ArrayList<ReportItem> reportItems = new ArrayList<>();
@@ -106,5 +148,29 @@ public class PostulanteDao extends BaseDAO{
             closeDBHelper();
         }
         return reportItems;
+    }
+
+    public ArrayList<String> getClasses() {
+        Log.v(TAG, "Start getClasses");
+        ArrayList<String> classes = new ArrayList<>();
+        try {
+            openDBHelper();
+            SQL = "select distinct nro_aula from postulante";
+            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()){
+                while (!cursor.isAfterLast()){
+                    classes.add(cursor.getString(cursor.getColumnIndex("nro_aula")));
+                    cursor.moveToNext();
+                }
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+            Log.e(TAG, "Error when get classes");
+        } finally {
+            Log.v(TAG, "End getClasses");
+            cursor.close();
+            closeDBHelper();
+        }
+        return classes;
     }
 }

@@ -33,10 +33,6 @@
 
         <service android:name=".service.SyncService" />
 
-        <activity
-            android:name=".activitys.ReportDetailActivity"
-            android:label="@string/title_activity_report_detail" >
-        </activity>
     </application>
 
 </manifest>
