@@ -7,10 +7,10 @@
             android:icon="@drawable/ic_check_box_black_24dp"
             android:checked="true"
             android:title="@string/present.item" />
-        <item
+        <!--<item
             android:id="@+id/nav_present_classes"
             android:icon="@drawable/ic_check_box_black_24dp"
-            android:title="@string/present.classes.item" />
+            android:title="@string/present.classes.item" />-->
         <item
             android:id="@+id/nav_report"
             android:icon="@drawable/ic_description_black_24dp"
