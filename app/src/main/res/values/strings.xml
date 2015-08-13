@@ -34,6 +34,7 @@
     <string name="label.location.presence">Local de Capacitación</string>
     <string name="hint.location.presence">Local de Capacitación</string>
     <string name="label.numberClass.presence">Nro de Aula</string>
+    <string name="label.numberBungalow.presence">Bungalow</string>
     <string name="hint.numberClass.presence">Nro</string>
     <string name="label.dni.presence">D.N.I.:</string>
     <string name="hint.dni.presence">D.N.I.</string>
