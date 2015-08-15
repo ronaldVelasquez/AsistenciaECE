@@ -61,7 +61,7 @@ public class PadronActivity extends Activity {
 //                Create parameters
                 HashMap<String, Integer> parameters = new HashMap<String, Integer>();
                 parameters.put("idLocal", idLocal);
-                Log.e("adas", "" + idLocal);
+                Log.e(TAG, "idLocal: " + idLocal);
                 RequestQueue requestQueue = Volley.newRequestQueue(PadronActivity.this);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ConstantsUtils.URL_PADRON, new JSONObject(parameters), new Response.Listener<JSONObject>() {
                     @Override

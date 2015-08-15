@@ -24,14 +24,15 @@ import com.inei.asistenciaece.listeners.BudaCallback;
 import java.util.ArrayList;
 
 public class ReportLocalFragment extends Fragment {
-    /*public static final String ARG_SECTION_TITLE = "section_number";*/
+    public static final String ARG_SECTION_TITLE = "section_number";
     public static RecyclerView recyclerView;
     private static Activity activity;
-    public static ReportLocalFragment newInstance(){
+
+    public static ReportLocalFragment newInstance(String sectionTitle){
         ReportLocalFragment fragment = new ReportLocalFragment();
-       /* Bundle args = new Bundle();
-        args.putString(ARG_SECTION_TITLE, sectionTitle);*/
-        /*fragment.setArguments(args);*/
+        Bundle args = new Bundle();
+        args.putString(ARG_SECTION_TITLE, sectionTitle);
+        fragment.setArguments(args);
         return fragment;
     }
 

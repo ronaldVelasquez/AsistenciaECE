@@ -7,21 +7,20 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.inei.asistenciaece.Business.AsistenciaBusiness;
 import com.inei.asistenciaece.Business.CargoBusiness;
 import com.inei.asistenciaece.Business.LocalBusiness;
-import com.inei.asistenciaece.Business.PostulanteBusiness;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
+import com.inei.asistenciaece.Entity.StatusEntity;
 import com.inei.asistenciaece.R;
 
 public class PresenceFragment extends Fragment {
 
     public static final String ARG_SECTION_TITLE = "section title";
     private EditText edtxDni;
-    private TextView labelMessage;
     private TextView txtName;
     private TextView txtCargo;
     private TextView txtLocation;
@@ -45,7 +44,6 @@ public class PresenceFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_presence, container, false);
         edtxDni = (EditText) view.findViewById(R.id.edtx_dni);
-        labelMessage = (TextView) view.findViewById(R.id.label_message);
         txtDni = (TextView) view.findViewById(R.id.txt_dni);
         txtName = (TextView) view.findViewById(R.id.txt_name);
         txtCargo = (TextView) view.findViewById(R.id.txt_cargo);
@@ -79,27 +77,40 @@ public class PresenceFragment extends Fragment {
     }
 
     private void showPostulante(String dni) {
-        PostulanteBusiness postulanteBusiness = new PostulanteBusiness(getActivity().getApplicationContext());
-        PostulanteEntity postulanteEntity = postulanteBusiness.checkPresence(dni);
+        /**
+        idMarcacion:
+         1 = local
+        2 = aula
+         */
+
+        /** Status
+         * 0 = error
+         * 1 = new asistencia
+         * 2 = asistencia exist
+         * 3 = postulante no exist
+         * 4 = exist but horario no exist
+         */
+        AsistenciaBusiness asistenciaBusiness = new AsistenciaBusiness(getActivity().getApplicationContext());
+        StatusEntity statusEntity = asistenciaBusiness.checkPresence(dni, 1);
         String message = "";
         View view = getActivity().findViewById(R.id.layout_postulante);
         TextView txtMesssage = (TextView) getActivity().findViewById(R.id.label_message);
-        switch (postulanteEntity.getM1_estado()){
-            case 0:
+        switch (statusEntity.getStatus()){
+            case 1:
                 message = "Se registró correctamente";
                 view.setBackgroundColor(getResources().getColor(R.color.correct));
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.correct));
                 txtMesssage.setText(message);
-                fillDataShow(postulanteEntity);
+                fillDataShow(statusEntity.getPostulanteEntity());
                 break;
-            case 1: case 2:
+            case 2:
                 message = "El postulante ya fue registrado";
                 view.setBackgroundColor(getResources().getColor(R.color.warning));
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.warning));
                 txtMesssage.setText(message);
-                fillDataShow(postulanteEntity);
+                fillDataShow(statusEntity.getPostulanteEntity());
                 break;
             case 3:
                 message = "El postulante no pertenece al local";
@@ -110,6 +121,14 @@ public class PresenceFragment extends Fragment {
                 clearDataShow();
                 break;
             case 4:
+                message = "No se puede registrar porque no hay horario de capacitación";
+                view.setBackgroundColor(getResources().getColor(R.color.error_postulante));
+                txtMesssage.setVisibility(View.VISIBLE);
+                txtMesssage.setTextColor(getResources().getColor(R.color.error_postulante));
+                txtMesssage.setText(message);
+                clearDataShow();
+                break;
+            case 0:
                 message = "Error";
                 view.setBackgroundColor(getResources().getColor(R.color.error_postulante));
                 txtMesssage.setVisibility(View.VISIBLE);
@@ -133,6 +152,7 @@ public class PresenceFragment extends Fragment {
         txtDni.setText(postulanteEntity.getDni());
         txtName.setText(postulanteEntity.getApe_nom());
         txtCargo.setText(getCargo(postulanteEntity.getId_cargo()));
+        txtSede.setText(getSede(postulanteEntity.getCod_sede_operativa()));
         txtLocation.setText(getLocal(postulanteEntity.getId_local()));
         txtClassroom.setText(postulanteEntity.getNro_aula());
     }

@@ -114,10 +114,33 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/label_cargo"
+                    android:id="@+id/label_sede"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txt_name"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/label.sede.presence"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
+                    android:textStyle="bold" /> />
+
+                <TextView
+                    android:id="@+id/txt_sede"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/label_sede"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:hint="@string/hint.sede.presence"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/label_cargo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txt_sede"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="10dp"
                     android:text="@string/label.cargo.presence"
@@ -173,11 +196,11 @@
             <TableRow android:gravity="center">
 
                 <TableRow
-                    android:background="@drawable/border"
-                    android:gravity="center"
                     android:layout_width="0dp"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layout_height="match_parent">
+                    android:background="@drawable/border"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/label_classroom"
@@ -189,11 +212,11 @@
                 </TableRow>
 
                 <TableRow
-                    android:background="@drawable/border"
-                    android:gravity="center"
-                    android:layout_weight="1"
                     android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/label_bungalow"
@@ -206,14 +229,14 @@
 
             </TableRow>
 
-            <TableRow
-                android:gravity="center">
+            <TableRow android:gravity="center">
 
-                <TableLayout android:background="@drawable/border"
-                    android:gravity="center"
-                    android:layout_weight="1"
+                <TableLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/txt_classroom"
@@ -224,11 +247,12 @@
                         android:textStyle="bold" />
                 </TableLayout>
 
-                <TableLayout android:background="@drawable/border"
-                    android:gravity="center"
-                    android:layout_weight="1"
+                <TableLayout
                     android:layout_width="0dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/border"
+                    android:gravity="center">
 
                     <TextView
                         android:id="@+id/txt_bungalow"

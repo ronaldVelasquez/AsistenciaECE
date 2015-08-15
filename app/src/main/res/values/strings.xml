@@ -29,6 +29,8 @@
     <string name="hint.label.presence">Message</string>
     <string name="label.name.presence">Apellidos y Nombres :</string>
     <string name="hint.name.presence">Apellidos y Nombres</string>
+    <string name="label.sede.presence">Sede :</string>
+    <string name="hint.sede.presence">Sede</string>
     <string name="label.cargo.presence">Cargo :</string>
     <string name="hint.cargo.presence">Cargo</string>
     <string name="label.location.presence">Local de Capacitación</string>

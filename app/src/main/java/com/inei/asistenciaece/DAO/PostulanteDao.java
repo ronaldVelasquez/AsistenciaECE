@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.inei.asistenciaece.Entity.HorarioEntity;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
 import com.inei.asistenciaece.Utils.DateFormatUtil;
 import com.inei.asistenciaece.Utils.ReportItem;
@@ -27,20 +28,17 @@ public class PostulanteDao extends BaseDAO{
         initDBHelper(context);
     }
 
-    public PostulanteEntity checkPresence(String dni){
+    /*public PostulanteEntity checkPresence(String dni, HorarioEntity horarioEntity, String dateNow, String timeNow){
         Log.v(TAG, "Star checkPrensence");
         PostulanteEntity postulanteEntity = new PostulanteEntity();
         try{
             openDBHelper();
-            SQL = "select * from postulante where dni like '" + dni + "'";
+            String dateTimeStart = horarioEntity.getFecha() + " " + horarioEntity.getHora_inicio();
+            String dateTimeFinish = horarioEntity.getFecha() + " " + horarioEntity.getHora_fin();
+            SQL = "select * from postulante_asistencia where dni = '" + dni + "' and (fecha >= date('" + dateTimeStart + "') and fecha <= date('"+ dateTimeFinish + "')";
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()){
-                postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m1_estado")));
-                postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
-                postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
-                postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
-                postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
-                postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
+                postulanteEntity.
 
                 if (postulanteEntity.getM1_estado() == 0){
                     Log.v(TAG, "Checking Presence");
@@ -67,9 +65,9 @@ public class PostulanteDao extends BaseDAO{
             closeDBHelper();
         }
         return postulanteEntity;
-    }
+    }*/
 
-    public PostulanteEntity checkPresence(String dni, String aula){
+   /* public PostulanteEntity checkPresence(String dni, String aula){
         Log.v(TAG, "Star checkPrensence");
         PostulanteEntity postulanteEntity = new PostulanteEntity();
         try{
@@ -109,7 +107,7 @@ public class PostulanteDao extends BaseDAO{
             closeDBHelper();
         }
         return postulanteEntity;
-    }
+    }*/
 
     public ArrayList<ReportItem> getReportLocal() {
         Log.v(TAG, "Start getReport");
@@ -211,5 +209,38 @@ public class PostulanteDao extends BaseDAO{
             closeDBHelper();
         }
         return classes;
+    }
+
+    public PostulanteEntity checkPostulante(String dni) {
+
+        PostulanteEntity postulanteEntity = new PostulanteEntity();
+        Log.v(TAG, "Start check Postulante");
+        try{
+            openDBHelper();
+            SQL = "select * from postulante where dni = '" + dni + "'";
+            cursor  = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst()){
+                postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
+                postulanteEntity.setNro_version(cursor.getInt(cursor.getColumnIndex("nro_version")));
+                postulanteEntity.setLocal_id(cursor.getInt(cursor.getColumnIndex("local_id")));
+                postulanteEntity.setCargo_id(cursor.getInt(cursor.getColumnIndex("cargo_id")));
+                postulanteEntity.setSede_id(cursor.getString(cursor.getColumnIndex("sede_id")));
+                postulanteEntity.setApellidos_nombres(cursor.getString(cursor.getColumnIndex("apellidos_nombres")));
+                postulanteEntity.setId(cursor.getInt(cursor.getColumnIndex("id")));
+                postulanteEntity.setNumero_aula(cursor.getInt(cursor.getColumnIndex("numero_aula")));
+                postulanteEntity.setNumero_bungalow(cursor.getString(cursor.getColumnIndex("numero_bungalow")));
+            } else  {
+                postulanteEntity = null;
+            }
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Log.v(TAG, "Error database");
+            postulanteEntity = null;
+        } finally {
+            cursor.close();
+            closeDBHelper();
+        }
+        return postulanteEntity;
+
     }
 }

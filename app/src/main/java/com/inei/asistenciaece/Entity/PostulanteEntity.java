@@ -1,47 +1,71 @@
 package com.inei.asistenciaece.Entity;
 
 public class PostulanteEntity {
-    private int id_local;
-    private int id_cargo;
+    private int id;
+    private int nro_version;
+    private int local_id;
+    private int cargo_id;
+    private String sede_id;
     private String dni;
-    private String ape_nom;
-    private String nro_aula;
-    private String lugar_asigna;
-    private int m1_estado;
-    private String m1_fecha;
-    private int m2_estado;
-    private String m2_fecha;
+    private String apellidos_nombres;
+    private int numero_aula;
+    private String numero_bungalow;
+    private int status;
 
-    public PostulanteEntity(int id_local, int id_cargo, String dni, String ape_nom, String nro_aula, String lugar_asigna, int m1_estado, String m1_fecha, int m2_estado, String m2_fecha) {
-        this.id_local = id_local;
-        this.id_cargo = id_cargo;
+    public PostulanteEntity(int id, int nro_version, int local_id, int cargo_id, String sede_id, String dni, String apellidos_nombres, int numero_aula, String numero_bungalow, int status) {
+        this.id = id;
+        this.nro_version= nro_version;
+        this.local_id = local_id;
+        this.cargo_id = cargo_id;
+        this.sede_id = sede_id;
         this.dni = dni;
-        this.ape_nom = ape_nom;
-        this.nro_aula = nro_aula;
-        this.lugar_asigna = lugar_asigna;
-        this.m1_estado = m1_estado;
-        this.m1_fecha = m1_fecha;
-        this.m2_estado = m2_estado;
-        this.m2_fecha = m2_fecha;
+        this.apellidos_nombres = apellidos_nombres;
+        this.numero_aula = numero_aula;
+        this.numero_bungalow = numero_bungalow;
+        this.status = status;
     }
 
     public PostulanteEntity() {
     }
 
-    public int getId_local() {
-        return id_local;
+    public int getId() {
+        return id;
     }
 
-    public void setId_local(int id_local) {
-        this.id_local = id_local;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getId_cargo() {
-        return id_cargo;
+    public int getNro_version() {
+        return nro_version;
     }
 
-    public void setId_cargo(int id_cargo) {
-        this.id_cargo = id_cargo;
+    public void setNro_version(int nro_version) {
+        this.nro_version = nro_version;
+    }
+
+    public int getLocal_id() {
+        return local_id;
+    }
+
+    public void setLocal_id(int local_id) {
+        this.local_id = local_id;
+    }
+
+    public int getCargo_id() {
+        return cargo_id;
+    }
+
+    public void setCargo_id(int cargo_id) {
+        this.cargo_id = cargo_id;
+    }
+
+    public String getSede_id() {
+        return sede_id;
+    }
+
+    public void setSede_id(String sede_id) {
+        this.sede_id = sede_id;
     }
 
     public String getDni() {
@@ -52,60 +76,36 @@ public class PostulanteEntity {
         this.dni = dni;
     }
 
-    public String getApe_nom() {
-        return ape_nom;
+    public String getApellidos_nombres() {
+        return apellidos_nombres;
     }
 
-    public void setApe_nom(String ape_nom) {
-        this.ape_nom = ape_nom;
+    public void setApellidos_nombres(String apellidos_nombres) {
+        this.apellidos_nombres = apellidos_nombres;
     }
 
-    public String getNro_aula() {
-        return nro_aula;
+    public int getNumero_aula() {
+        return numero_aula;
     }
 
-    public void setNro_aula(String nro_aula) {
-        this.nro_aula = nro_aula;
+    public void setNumero_aula(int numero_aula) {
+        this.numero_aula = numero_aula;
     }
 
-    public String getLugar_asigna() {
-        return lugar_asigna;
+    public String getNumero_bungalow() {
+        return numero_bungalow;
     }
 
-    public void setLugar_asigna(String lugar_asigna) {
-        this.lugar_asigna = lugar_asigna;
+    public void setNumero_bungalow(String numero_bungalow) {
+        this.numero_bungalow = numero_bungalow;
     }
 
-    public int getM1_estado() {
-        return m1_estado;
+    public int getStatus() {
+        return status;
     }
 
-    public void setM1_estado(int m1_estado) {
-        this.m1_estado = m1_estado;
-    }
-
-    public String getM1_fecha() {
-        return m1_fecha;
-    }
-
-    public void setM1_fecha(String m1_fecha) {
-        this.m1_fecha = m1_fecha;
-    }
-
-    public int getM2_estado() {
-        return m2_estado;
-    }
-
-    public void setM2_estado(int m2_estado) {
-        this.m2_estado = m2_estado;
-    }
-
-    public String getM2_fecha() {
-        return m2_fecha;
-    }
-
-    public void setM2_fecha(String m2_fecha) {
-        this.m2_fecha = m2_fecha;
+    public void setStatus(int status) {
+        this.status = status;
     }
 }
 

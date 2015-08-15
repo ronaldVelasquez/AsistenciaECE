@@ -130,8 +130,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 break;*/
             case "Reportes":
-                args.putString(ReportMainFragment.ARG_SECTION_TITLE, title);
-                fragment = ReportMainFragment.newInstance(title);
+                args.putString(com.inei.asistenciaece.fragments.ReportLocalFragment.ARG_SECTION_TITLE , title);
+                fragment = ReportLocalFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
             case "Consolidado":

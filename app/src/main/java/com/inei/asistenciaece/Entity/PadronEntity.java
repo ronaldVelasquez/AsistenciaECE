@@ -1,23 +1,31 @@
 package com.inei.asistenciaece.Entity;
 
-import com.inei.asistenciaece.DAO.VersionDao;
-
 import java.util.ArrayList;
 
 public class PadronEntity {
 
     private ArrayList<PostulanteEntity> postulantes;
-    private ArrayList<CargoEntity> cargo;
-    private ArrayList<LocalEntity> local;
-    private ArrayList<RolEntity> rol;
+    private ArrayList<CargoEntity> cargos;
+    private ArrayList<LocalEntity> locales;
+    private ArrayList<RolEntity> roles;
     private VersionEntity version;
+    private ArrayList<VersionTurnoEntity> versiones_turno;
+    private ArrayList<HorarioEntity> horarios;
+    private ArrayList<TipoCapacitacionEntity> tipos_capacitacion;
+    private ArrayList<MarcacionEntity> marcaciones;
+    private ArrayList<SedeOperativaEntity> sedes_operativas;
 
-    public PadronEntity(ArrayList<PostulanteEntity> postulantes, ArrayList<CargoEntity> cargo, ArrayList<LocalEntity> local, ArrayList<RolEntity> rol, VersionEntity version) {
+    public PadronEntity(ArrayList<PostulanteEntity> postulantes, ArrayList<CargoEntity> cargos, ArrayList<LocalEntity> locales, ArrayList<RolEntity> roles, VersionEntity version, ArrayList<VersionTurnoEntity> versiones_turno, ArrayList<HorarioEntity> horarios, ArrayList<TipoCapacitacionEntity> tipos_capacitacion, ArrayList<MarcacionEntity> marcaciones, ArrayList<SedeOperativaEntity> sedes_operativas) {
         this.postulantes = postulantes;
-        this.cargo = cargo;
-        this.local = local;
-        this.rol = rol;
+        this.cargos = cargos;
+        this.locales = locales;
+        this.roles = roles;
         this.version = version;
+        this.versiones_turno = versiones_turno;
+        this.horarios = horarios;
+        this.tipos_capacitacion = tipos_capacitacion;
+        this.marcaciones = marcaciones;
+        this.sedes_operativas = sedes_operativas;
     }
 
     public PadronEntity() {
@@ -31,28 +39,28 @@ public class PadronEntity {
         this.postulantes = postulantes;
     }
 
-    public ArrayList<CargoEntity> getCargo() {
-        return cargo;
+    public ArrayList<CargoEntity> getCargos() {
+        return cargos;
     }
 
-    public void setCargo(ArrayList<CargoEntity> cargo) {
-        this.cargo = cargo;
+    public void setCargos(ArrayList<CargoEntity> cargos) {
+        this.cargos = cargos;
     }
 
-    public ArrayList<LocalEntity> getLocal() {
-        return local;
+    public ArrayList<LocalEntity> getLocales() {
+        return locales;
     }
 
-    public void setLocal(ArrayList<LocalEntity> local) {
-        this.local = local;
+    public void setLocales(ArrayList<LocalEntity> locales) {
+        this.locales = locales;
     }
 
-    public ArrayList<RolEntity> getRol() {
-        return rol;
+    public ArrayList<RolEntity> getRoles() {
+        return roles;
     }
 
-    public void setRol(ArrayList<RolEntity> rol) {
-        this.rol = rol;
+    public void setRoles(ArrayList<RolEntity> roles) {
+        this.roles = roles;
     }
 
     public VersionEntity getVersion() {
@@ -61,5 +69,45 @@ public class PadronEntity {
 
     public void setVersion(VersionEntity version) {
         this.version = version;
+    }
+
+    public ArrayList<VersionTurnoEntity> getVersiones_turno() {
+        return versiones_turno;
+    }
+
+    public void setVersiones_turno(ArrayList<VersionTurnoEntity> versiones_turno) {
+        this.versiones_turno = versiones_turno;
+    }
+
+    public ArrayList<HorarioEntity> getHorarios() {
+        return horarios;
+    }
+
+    public void setHorarios(ArrayList<HorarioEntity> horarios) {
+        this.horarios = horarios;
+    }
+
+    public ArrayList<TipoCapacitacionEntity> getTipos_capacitacion() {
+        return tipos_capacitacion;
+    }
+
+    public void setTipos_capacitacion(ArrayList<TipoCapacitacionEntity> tipos_capacitacion) {
+        this.tipos_capacitacion = tipos_capacitacion;
+    }
+
+    public ArrayList<MarcacionEntity> getMarcaciones() {
+        return marcaciones;
+    }
+
+    public void setMarcaciones(ArrayList<MarcacionEntity> marcaciones) {
+        this.marcaciones = marcaciones;
+    }
+
+    public ArrayList<SedeOperativaEntity> getSedes_operativas() {
+        return sedes_operativas;
+    }
+
+    public void setSedes_operativas(ArrayList<SedeOperativaEntity> sedes_operativas) {
+        this.sedes_operativas = sedes_operativas;
     }
 }
