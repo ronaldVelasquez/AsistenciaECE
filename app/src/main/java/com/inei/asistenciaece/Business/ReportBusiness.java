@@ -22,7 +22,7 @@ public class ReportBusiness {
     public ArrayList<ReportItem> getReportLocal(HorarioEntity horarioEntity){
         return postulanteDao.getReportLocal(horarioEntity);
     }
-    public ArrayList<ReportItem> getReportClasses(){
-        return postulanteDao.getReportClasses();
+    public ArrayList<ReportItem> getReportClasses(HorarioEntity horarioEntity){
+        return postulanteDao.getReportClasses(horarioEntity);
     }
 }

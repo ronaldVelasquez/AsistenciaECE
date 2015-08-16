@@ -187,7 +187,7 @@
 
         <TableLayout
             android:id="@+id/layout_table"
-            android:layout_width="1000dp"
+            android:layout_width="700dp"
             android:layout_height="300dp"
             android:layout_margin="16dp"
             android:layout_weight="1"
@@ -211,21 +211,7 @@
                         android:textStyle="bold" />
                 </TableRow>
 
-                <TableRow
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:gravity="center">
 
-                    <TextView
-                        android:id="@+id/label_bungalow"
-                        android:gravity="center"
-                        android:text="@string/label.numberBungalow.presence"
-                        android:textColor="#000000"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
-                </TableRow>
 
             </TableRow>
 
@@ -246,23 +232,6 @@
                         android:textSize="100sp"
                         android:textStyle="bold" />
                 </TableLayout>
-
-                <TableLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/border"
-                    android:gravity="center">
-
-                    <TextView
-                        android:id="@+id/txt_bungalow"
-                        android:gravity="center"
-                        android:hint="@string/hint.numberClass.presence"
-                        android:textColor="#000000"
-                        android:textSize="100sp"
-                        android:textStyle="bold" />
-                </TableLayout>
-
             </TableRow>
         </TableLayout>
     </LinearLayout>

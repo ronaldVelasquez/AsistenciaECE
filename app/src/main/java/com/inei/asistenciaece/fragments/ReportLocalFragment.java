@@ -29,35 +29,9 @@ public class ReportLocalFragment extends Fragment {
     public static RecyclerView recyclerView;
     private static Activity activity;
 
-    public static ReportLocalFragment newInstance(String sectionTitle){
+    public static ReportLocalFragment newInstance(){
         ReportLocalFragment fragment = new ReportLocalFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_SECTION_TITLE, sectionTitle);
-        fragment.setArguments(args);
         return fragment;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        super.onCreateOptionsMenu(menu, inflater);
-        inflater.inflate(R.menu.menu_main, menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.action_sync:
-                PadronBusiness padronBusiness = new PadronBusiness(getActivity());
-                padronBusiness.syncDataManual(new BudaCallback() {
-                    @Override
-                    public void callback() {
-                        ReportLocalFragment.showReport();
-                        /*ReportClassesFragment.showReport();*/
-                    }
-                });
-                break;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     public ReportLocalFragment() {

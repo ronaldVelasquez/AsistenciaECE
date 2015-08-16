@@ -59,4 +59,34 @@ public class AsistenciaBusiness {
         }
         return statusEntity;
     }
+
+    public StatusEntity checkPresence(String dni, int idMarcacion, int aula){
+        /**
+         * 0 = error
+         * 1 = new asistencia
+         * 2 = asistencia exist
+         * 3 = postulante no exist
+         * 4 = exist but horario no exist
+         */
+        StatusEntity statusEntity = new StatusEntity();
+        Date dateNow = Calendar.getInstance().getTime();
+        String date = DateFormatUtil.getDate(dateNow);
+        String time = DateFormatUtil.getTime(dateNow);
+        PostulanteEntity postulanteEntity = postulanteDao.checkPostulante(dni, aula);
+        if (postulanteEntity != null){
+            statusEntity.setPostulanteEntity(postulanteEntity);
+            HorarioEntity horarioEntity = horarioDao.getHorario(date, time, idMarcacion);
+            if (horarioEntity != null){
+                AsistenciaEntity asistenciaEntity = asistenciaDao.checkPresence(horarioEntity, date, time, postulanteEntity);
+                statusEntity.setStatus(asistenciaEntity.getStatus());
+            } else {
+                statusEntity.setStatus(4);
+                statusEntity.setPostulanteEntity(postulanteEntity);
+            }
+        } else {
+            statusEntity.setStatus(3);
+            statusEntity.setPostulanteEntity(null);
+        }
+        return statusEntity;
+    }
 }

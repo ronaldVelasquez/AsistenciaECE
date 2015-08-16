@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.inei.asistenciaece.Business.HorarioBusiness;
 import com.inei.asistenciaece.Business.ReportBusiness;
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.ReportAdapter;
@@ -45,7 +46,8 @@ public class ReportClassesFragment extends Fragment {
 
     public static void showReport(){
         ReportBusiness reportBusiness = new ReportBusiness(activity.getApplicationContext());
-        ArrayList<ReportItem> reportItems = reportBusiness.getReportClasses();
+        HorarioBusiness horarioBusiness = new HorarioBusiness(activity.getApplicationContext());
+        ArrayList<ReportItem> reportItems = reportBusiness.getReportClasses(horarioBusiness.getHorario());
         if (!reportItems.isEmpty()){
             recyclerView.setLayoutManager(new LinearLayoutManager(activity));
             ReportAdapter reportAdapter = new ReportAdapter(reportItems, activity);

@@ -28,7 +28,6 @@ public class PresenceFragment extends Fragment {
     private TextView txtDni;
     private TextView txtClassroom;
     private TextView txtSede;
-    private TextView txtBungalow;
     private String dni;
 
     public static PresenceFragment newInstance(String title) {
@@ -51,7 +50,6 @@ public class PresenceFragment extends Fragment {
         txtName = (TextView) view.findViewById(R.id.txt_name);
         txtCargo = (TextView) view.findViewById(R.id.txt_cargo);
         txtLocation = (TextView) view.findViewById(R.id.txt_location);
-        txtBungalow = (TextView) view.findViewById(R.id.txt_bungalow);
         txtClassroom = (TextView) view.findViewById(R.id.txt_classroom);
         txtSede = (TextView) view.findViewById(R.id.txt_sede);
 
@@ -164,7 +162,6 @@ public class PresenceFragment extends Fragment {
         txtName.setText(postulanteEntity.getApellidos_nombres());
         txtCargo.setText(getCargo(postulanteEntity.getCargo_id()));
         txtSede.setText(getSede(postulanteEntity.getSede_id()));
-        txtBungalow.setText(""+postulanteEntity.getNumero_bungalow());
         txtLocation.setText(getLocal(postulanteEntity.getLocal_id()));
         txtClassroom.setText(""+postulanteEntity.getNumero_aula());
     }
@@ -174,7 +171,6 @@ public class PresenceFragment extends Fragment {
         txtDni.setText("");
         txtCargo.setText("");
         txtLocation.setText("");
-        txtBungalow.setText("");
         txtSede.setText("");
         txtClassroom.setText("");
     }

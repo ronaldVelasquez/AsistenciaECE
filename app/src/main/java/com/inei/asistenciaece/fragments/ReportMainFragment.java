@@ -65,7 +65,7 @@ public class ReportMainFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_report_main, container, false);
     }
 
-    /*@Override
+    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         viewPager = (ViewPager) view.findViewById(R.id.viewpager);
@@ -89,5 +89,5 @@ public class ReportMainFragment extends Fragment {
         adapter.addFragment(ReportLocalFragment.newInstance(), "Asistencia al Local");
         adapter.addFragment(ReportClassesFragment.newInstance(), "Asistencia en Aula");
         viewPager.setAdapter(adapter);
-    }*/
+    }
 }
