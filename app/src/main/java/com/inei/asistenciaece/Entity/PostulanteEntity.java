@@ -3,25 +3,27 @@ package com.inei.asistenciaece.Entity;
 public class PostulanteEntity {
     private int id;
     private int nro_version;
+    private int tipo_capacitacion_id;
     private int local_id;
     private int cargo_id;
     private String sede_id;
     private String dni;
     private String apellidos_nombres;
-    private int numero_aula;
-    private String numero_bungalow;
+    private int numero_de_aula;
+    private String numero_de_bungalow;
     private int status;
 
-    public PostulanteEntity(int id, int nro_version, int local_id, int cargo_id, String sede_id, String dni, String apellidos_nombres, int numero_aula, String numero_bungalow, int status) {
+    public PostulanteEntity(int id, int nro_version, int tipo_capacitacion_id, int local_id, int cargo_id, String sede_id, String dni, String apellidos_nombres, int numero_de_aula, String numero_de_bungalow, int status) {
         this.id = id;
-        this.nro_version= nro_version;
+        this.nro_version = nro_version;
+        this.tipo_capacitacion_id = tipo_capacitacion_id;
         this.local_id = local_id;
         this.cargo_id = cargo_id;
         this.sede_id = sede_id;
         this.dni = dni;
         this.apellidos_nombres = apellidos_nombres;
-        this.numero_aula = numero_aula;
-        this.numero_bungalow = numero_bungalow;
+        this.numero_de_aula = numero_de_aula;
+        this.numero_de_bungalow = numero_de_bungalow;
         this.status = status;
     }
 
@@ -42,6 +44,14 @@ public class PostulanteEntity {
 
     public void setNro_version(int nro_version) {
         this.nro_version = nro_version;
+    }
+
+    public int getTipo_capacitacion_id() {
+        return tipo_capacitacion_id;
+    }
+
+    public void setTipo_capacitacion_id(int tipo_capacitacion_id) {
+        this.tipo_capacitacion_id = tipo_capacitacion_id;
     }
 
     public int getLocal_id() {
@@ -85,19 +95,19 @@ public class PostulanteEntity {
     }
 
     public int getNumero_aula() {
-        return numero_aula;
+        return numero_de_aula;
     }
 
-    public void setNumero_aula(int numero_aula) {
-        this.numero_aula = numero_aula;
+    public void setNumero_aula(int numero_de_aula) {
+        this.numero_de_aula = numero_de_aula;
     }
 
     public String getNumero_bungalow() {
-        return numero_bungalow;
+        return numero_de_bungalow;
     }
 
-    public void setNumero_bungalow(String numero_bungalow) {
-        this.numero_bungalow = numero_bungalow;
+    public void setNumero_bungalow(String numero_de_bungalow) {
+        this.numero_de_bungalow = numero_de_bungalow;
     }
 
     public int getStatus() {

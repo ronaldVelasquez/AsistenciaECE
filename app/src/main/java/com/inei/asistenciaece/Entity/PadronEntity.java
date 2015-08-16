@@ -9,19 +9,19 @@ public class PadronEntity {
     private ArrayList<LocalEntity> locales;
     private ArrayList<RolEntity> roles;
     private VersionEntity version;
-    private ArrayList<VersionTurnoEntity> versiones_turno;
+    private ArrayList<VersionTurnoEntity> versiones_turnos;
     private ArrayList<HorarioEntity> horarios;
     private ArrayList<TipoCapacitacionEntity> tipos_capacitacion;
     private ArrayList<MarcacionEntity> marcaciones;
     private ArrayList<SedeOperativaEntity> sedes_operativas;
 
-    public PadronEntity(ArrayList<PostulanteEntity> postulantes, ArrayList<CargoEntity> cargos, ArrayList<LocalEntity> locales, ArrayList<RolEntity> roles, VersionEntity version, ArrayList<VersionTurnoEntity> versiones_turno, ArrayList<HorarioEntity> horarios, ArrayList<TipoCapacitacionEntity> tipos_capacitacion, ArrayList<MarcacionEntity> marcaciones, ArrayList<SedeOperativaEntity> sedes_operativas) {
+    public PadronEntity(ArrayList<PostulanteEntity> postulantes, ArrayList<CargoEntity> cargos, ArrayList<LocalEntity> locales, ArrayList<RolEntity> roles, VersionEntity version, ArrayList<VersionTurnoEntity> versiones_turnos, ArrayList<HorarioEntity> horarios, ArrayList<TipoCapacitacionEntity> tipos_capacitacion, ArrayList<MarcacionEntity> marcaciones, ArrayList<SedeOperativaEntity> sedes_operativas) {
         this.postulantes = postulantes;
         this.cargos = cargos;
         this.locales = locales;
         this.roles = roles;
         this.version = version;
-        this.versiones_turno = versiones_turno;
+        this.versiones_turnos = versiones_turnos;
         this.horarios = horarios;
         this.tipos_capacitacion = tipos_capacitacion;
         this.marcaciones = marcaciones;
@@ -72,11 +72,11 @@ public class PadronEntity {
     }
 
     public ArrayList<VersionTurnoEntity> getVersiones_turno() {
-        return versiones_turno;
+        return versiones_turnos;
     }
 
-    public void setVersiones_turno(ArrayList<VersionTurnoEntity> versiones_turno) {
-        this.versiones_turno = versiones_turno;
+    public void setVersiones_turno(ArrayList<VersionTurnoEntity> versiones_turnos) {
+        this.versiones_turnos = versiones_turnos;
     }
 
     public ArrayList<HorarioEntity> getHorarios() {

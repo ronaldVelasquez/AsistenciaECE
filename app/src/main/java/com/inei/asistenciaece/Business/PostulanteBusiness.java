@@ -24,7 +24,7 @@ public class PostulanteBusiness {
         horarioDao = HorarioDao.getInstance(context);
     }
 
-    public PostulanteEntity checkPresence(String dni){
+    /*public PostulanteEntity checkPresence(String dni){
         Date dateNow = Calendar.getInstance().getTime();
         String date = DateFormatUtil.getDate(dateNow);
         String time = DateFormatUtil.getTime(dateNow);
@@ -35,11 +35,11 @@ public class PostulanteBusiness {
         }
 
         return postulanteEntity;
-    }
-    public PostulanteEntity checkPresence(String dni, String aula){
+    }*/
+    /*public PostulanteEntity checkPresence(String dni, String aula){
         PostulanteEntity postulanteEntity= postulanteDao.checkPresence(dni, aula);
         return postulanteEntity;
-    }
+    }*/
 
     public ArrayList<String> getClasses() {
         ArrayList<String> classes = postulanteDao.getClasses();

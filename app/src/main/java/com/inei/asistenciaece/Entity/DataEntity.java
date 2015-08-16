@@ -3,20 +3,20 @@ package com.inei.asistenciaece.Entity;
 import java.util.ArrayList;
 
 public class DataEntity {
-    private ArrayList<PostulanteEntity> postulantes;
+    private ArrayList<SendAsistenciaEntity> asistencias;
 
-    public DataEntity(ArrayList<PostulanteEntity> postulantes) {
-        this.postulantes = postulantes;
+    public DataEntity(ArrayList<SendAsistenciaEntity> asistencias) {
+        this.asistencias = asistencias;
     }
 
     public DataEntity() {
     }
 
-    public ArrayList<PostulanteEntity> getPostulantes() {
-        return postulantes;
+    public ArrayList<SendAsistenciaEntity> getAsistencias() {
+        return asistencias;
     }
 
-    public void setPostulantes(ArrayList<PostulanteEntity> postulantes) {
-        this.postulantes = postulantes;
+    public void setAsistencias(ArrayList<SendAsistenciaEntity> asistencias) {
+        this.asistencias = asistencias;
     }
 }

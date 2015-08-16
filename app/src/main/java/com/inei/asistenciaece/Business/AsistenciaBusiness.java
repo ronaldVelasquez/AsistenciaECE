@@ -1,6 +1,7 @@
 package com.inei.asistenciaece.Business;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.inei.asistenciaece.DAO.AsistenciaDao;
 import com.inei.asistenciaece.DAO.HorarioDao;
@@ -46,10 +47,11 @@ public class AsistenciaBusiness {
             statusEntity.setPostulanteEntity(postulanteEntity);
             HorarioEntity horarioEntity = horarioDao.getHorario(date, time, idMarcacion);
             if (horarioEntity != null){
-                AsistenciaEntity asistenciaEntity = asistenciaDao.checkPresence(dni, horarioEntity, date, time, postulanteEntity.getId());
+                AsistenciaEntity asistenciaEntity = asistenciaDao.checkPresence(horarioEntity, date, time, postulanteEntity);
                 statusEntity.setStatus(asistenciaEntity.getStatus());
             } else {
                 statusEntity.setStatus(4);
+                statusEntity.setPostulanteEntity(postulanteEntity);
             }
         } else {
             statusEntity.setStatus(3);

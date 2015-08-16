@@ -3,12 +3,12 @@ package com.inei.asistenciaece.Entity;
 public class VersionTurnoEntity {
 
     private int id;
-    private int numero_version;
+    private int numero_de_version;
     private String nombre;
 
-    public VersionTurnoEntity(int id, int numero_version, String nombre) {
+    public VersionTurnoEntity(int id, int numero_de_version, String nombre) {
         this.id = id;
-        this.numero_version = numero_version;
+        this.numero_de_version = numero_de_version;
         this.nombre = nombre;
     }
 
@@ -23,12 +23,12 @@ public class VersionTurnoEntity {
         this.id = id;
     }
 
-    public int getNumero_version() {
-        return numero_version;
+    public int getNumero_de_version() {
+        return numero_de_version;
     }
 
-    public void setNumero_version(int numero_version) {
-        this.numero_version = numero_version;
+    public void setNumero_de_version(int numero_de_version) {
+        this.numero_de_version = numero_de_version;
     }
 
     public String getNombre() {

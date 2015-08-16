@@ -2,13 +2,12 @@ package com.inei.asistenciaece.Entity;
 
 public class VersionEntity {
 
-    private int nro_version;
+    private int numero_de_version;
     private String fechaCrea;
     private String usuarioCrea;
 
-    public VersionEntity(int nro_version, String fechaCrea, String usuarioCrea) {
-
-        this.nro_version = nro_version;
+    public VersionEntity(int numero_de_version, String fechaCrea, String usuarioCrea) {
+        this.numero_de_version = numero_de_version;
         this.fechaCrea = fechaCrea;
         this.usuarioCrea = usuarioCrea;
     }
@@ -16,6 +15,13 @@ public class VersionEntity {
     public VersionEntity() {
     }
 
+    public int getNumero_de_version() {
+        return numero_de_version;
+    }
+
+    public void setNumero_de_version(int numero_de_version) {
+        this.numero_de_version = numero_de_version;
+    }
 
     public String getFechaCrea() {
         return fechaCrea;
@@ -31,13 +37,5 @@ public class VersionEntity {
 
     public void setUsuarioCrea(String usuarioCrea) {
         this.usuarioCrea = usuarioCrea;
-    }
-
-    public int getNro_version() {
-        return nro_version;
-    }
-
-    public void setNro_version(int nro_version) {
-        this.nro_version = nro_version;
     }
 }

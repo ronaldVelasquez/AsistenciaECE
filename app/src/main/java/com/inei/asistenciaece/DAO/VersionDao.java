@@ -31,7 +31,7 @@ public class VersionDao extends BaseDAO {
             SQL = "select * from version";
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if(cursor.moveToFirst()){
-                versionEntity.setNro_version(cursor.getInt(cursor.getColumnIndex("nro_version")));
+                versionEntity.setNumero_de_version(cursor.getInt(cursor.getColumnIndex("numero_de_version")));
             }
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -51,7 +51,7 @@ public class VersionDao extends BaseDAO {
             openDBHelper();
             Log.v(TAG, "Start addVersion");
             contentValues = new ContentValues();
-            contentValues.put("nro_version", versionEntity.getNro_version());
+            contentValues.put("numero_de_version", versionEntity.getNumero_de_version());
             contentValues.put("usuarioCrea", versionEntity.getUsuarioCrea());
             contentValues.put("fechaCrea", versionEntity.getFechaCrea());
             dbHelper.getDatabase().insertWithOnConflict("version", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);

@@ -14,9 +14,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.inei.asistenciaece.DAO.PadronDao;
+import com.inei.asistenciaece.Entity.AsistenciaEntity;
 import com.inei.asistenciaece.Entity.DataEntity;
 import com.inei.asistenciaece.Entity.PadronEntity;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
+import com.inei.asistenciaece.Entity.SendAsistenciaEntity;
 import com.inei.asistenciaece.Utils.ConstantsUtils;
 import com.inei.asistenciaece.activitys.MainActivity;
 import com.inei.asistenciaece.listeners.BudaCallback;
@@ -50,20 +52,20 @@ public class PadronBusiness {
                 Toast.makeText(context, "Error al almacenar datos de manera local", Toast.LENGTH_SHORT).show();
             }
         }
-
     }
 
     public void syncData(final BudaCallback budaCallback) {
-        ArrayList<PostulanteEntity> arrayPostulantes = padronDao.getPadronSync();
-        if (arrayPostulantes.isEmpty()) {
+        ArrayList<SendAsistenciaEntity> arrayAsistencia = padronDao.getPadronSync();
+        if (arrayAsistencia.isEmpty()) {
             Log.v(TAG, "Data Not found");
         } else {
             try {
-                DataEntity dataEntity = new DataEntity(arrayPostulantes);
+                DataEntity dataEntity = new DataEntity(arrayAsistencia);
                 final Gson gson = new Gson();
                 String jsonList = gson.toJson(dataEntity);
                 HashMap<String, JSONObject> parameters = new HashMap<>();
                 parameters.put("data", new JSONObject(jsonList));
+                Log.v(TAG, "Data a enviar: " + new JSONObject(jsonList));
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ConstantsUtils.URL_SYNC_PADRON, new JSONObject(parameters), new Response.Listener<JSONObject>() {
                     @Override
@@ -71,7 +73,7 @@ public class PadronBusiness {
                         Log.v(TAG, "json: " + jsonObject.toString());
                         DataEntity dataEntity1 = gson.fromJson(jsonObject.toString(), DataEntity.class);
                         padronDao.setDataSync(dataEntity1);
-                        if (budaCallback != null){
+                        if (budaCallback != null) {
                             budaCallback.callback();
                         }
                     }
@@ -92,17 +94,18 @@ public class PadronBusiness {
     public void syncDataManual(final BudaCallback budaCallback) {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Enviando Datos");
-        ArrayList<PostulanteEntity> arrayPostulantes = padronDao.getPadronSync();
-        if (arrayPostulantes.isEmpty()) {
+        ArrayList<SendAsistenciaEntity> arrayAsistencia = padronDao.getPadronSync();
+        if (arrayAsistencia.isEmpty()) {
             Log.v(TAG, "Data Not found");
             Toast.makeText(context, "No hay datos para sincronizar", Toast.LENGTH_SHORT).show();
         } else {
             try {
-                DataEntity dataEntity = new DataEntity(arrayPostulantes);
+                DataEntity dataEntity = new DataEntity(arrayAsistencia);
                 final Gson gson = new Gson();
                 String jsonList = gson.toJson(dataEntity);
                 HashMap<String, JSONObject> parameters = new HashMap<>();
                 parameters.put("data", new JSONObject(jsonList));
+                Log.v(TAG, "Data a enviar: " + new JSONObject(jsonList));
                 RequestQueue requestQueue = Volley.newRequestQueue(context);
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ConstantsUtils.URL_SYNC_PADRON, new JSONObject(parameters), new Response.Listener<JSONObject>() {
                     @Override
@@ -113,7 +116,7 @@ public class PadronBusiness {
                         progressDialog.dismiss();
                         Toast.makeText(context, "Datos enviados correctamente", Toast.LENGTH_SHORT).show();
 
-                        if(budaCallback != null)
+                        if (budaCallback != null)
                             budaCallback.callback();
 
                     }

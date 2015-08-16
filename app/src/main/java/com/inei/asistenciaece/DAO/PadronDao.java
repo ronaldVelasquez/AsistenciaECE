@@ -5,7 +5,9 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.inei.asistenciaece.Entity.AsistenciaEntity;
 import com.inei.asistenciaece.Entity.CargoEntity;
+import com.inei.asistenciaece.Entity.SendAsistenciaEntity;
 import com.inei.asistenciaece.Entity.TipoCapacitacionEntity;
 import com.inei.asistenciaece.Entity.DataEntity;
 import com.inei.asistenciaece.Entity.HorarioEntity;
@@ -51,13 +53,14 @@ public class PadronDao extends BaseDAO {
                     contentValues = new ContentValues();
                     contentValues.put("id", postulanteEntity.getId());
                     contentValues.put("nro_version", postulanteEntity.getNro_version());
+                    contentValues.put("tipo_capacitacion_id", postulanteEntity.getTipo_capacitacion_id());
                     contentValues.put("local_id", postulanteEntity.getLocal_id());
                     contentValues.put("cargo_id", postulanteEntity.getCargo_id());
                     contentValues.put("sede_id", postulanteEntity.getSede_id());
                     contentValues.put("dni", postulanteEntity.getDni());
                     contentValues.put("apellidos_nombres", postulanteEntity.getApellidos_nombres());
-                    contentValues.put("numero_aula", postulanteEntity.getNumero_aula());
-                    contentValues.put("numero_bungalow", postulanteEntity.getNumero_bungalow());
+                    contentValues.put("numero_de_aula", postulanteEntity.getNumero_aula());
+                    contentValues.put("numero_de_bungalow", postulanteEntity.getNumero_bungalow());
 
                     dbHelper.getDatabase().insertWithOnConflict("postulante", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
                 }
@@ -115,7 +118,7 @@ public class PadronDao extends BaseDAO {
                 for (VersionTurnoEntity versionTurnoEntity : padronEntity.getVersiones_turno()){
                     contentValues = new ContentValues();
                     contentValues.put("id", versionTurnoEntity.getId());
-                    contentValues.put("numero_version", versionTurnoEntity.getNumero_version());
+                    contentValues.put("numero_de_version", versionTurnoEntity.getNumero_de_version());
                     contentValues.put("nombre", versionTurnoEntity.getNombre());
                     dbHelper.getDatabase().insertWithOnConflict("version_turno", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
                 }
@@ -185,7 +188,7 @@ public class PadronDao extends BaseDAO {
             Log.v(TAG, "Insert version");
             VersionEntity versionEntity = padronEntity.getVersion();
             contentValues = new ContentValues();
-            contentValues.put("nro_version", versionEntity.getNro_version());
+            contentValues.put("numero_de_version", versionEntity.getNumero_de_version());
             contentValues.put("usuarioCrea", versionEntity.getUsuarioCrea());
             contentValues.put("fechaCrea", versionEntity.getFechaCrea());
             dbHelper.getDatabase().insertWithOnConflict("version", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
@@ -215,6 +218,7 @@ public class PadronDao extends BaseDAO {
             dbHelper.getDatabase().delete("tipo_capacitacion", null, null);
             dbHelper.getDatabase().delete("marcacion", null, null);
             dbHelper.getDatabase().delete("sede_operativa", null, null);
+            dbHelper.getDatabase().delete("postulante_asistencia", null, null);
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.e(TAG, "Error when deleted padron");
@@ -222,54 +226,48 @@ public class PadronDao extends BaseDAO {
         }
     }
 
-    public ArrayList<PostulanteEntity> getPadronSync() {
-        ArrayList<PostulanteEntity> arrayPostulates = new ArrayList<>();
+    public ArrayList<SendAsistenciaEntity> getPadronSync() {
+        ArrayList<SendAsistenciaEntity> arrayAsistencia = new ArrayList<>();
         Log.v(TAG, "Start get PadronSync");
         try {
             openDBHelper();
-            SQL = "select * from postulante where m1_estado = " + 1 + " or m2_estado = " + 1;
+            SQL = "select * from postulante_asistencia where asistencia = " + 1;
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()) {
                 while (!cursor.isAfterLast()) {
-                    PostulanteEntity postulanteEntity = new PostulanteEntity();
-                    postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
-                    postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
-                    postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
-                    postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
-                    postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
-                    postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m1_estado")));
-                    postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m2_estado")));
-                    postulanteEntity.setLugar_asigna(cursor.getString(cursor.getColumnIndex("lugar_asigna")));
-                    postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m1_fecha")));
-                    postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m2_fecha")));
-                    arrayPostulates.add(postulanteEntity);
+                    SendAsistenciaEntity asistenciaEntity = new SendAsistenciaEntity();
+                    asistenciaEntity.setPostulante_id(cursor.getInt(cursor.getColumnIndex("postulante_id")));
+                    asistenciaEntity.setMarcacion_id(cursor.getInt(cursor.getColumnIndex("marcacion_id")));
+                    asistenciaEntity.setAsistencia(cursor.getInt(cursor.getColumnIndex("asistencia")));
+                    asistenciaEntity.setFecha(cursor.getString(cursor.getColumnIndex("fecha")));
+                    asistenciaEntity.setVersion_turno_id(cursor.getInt(cursor.getColumnIndex("version_turno_id")));
+                    arrayAsistencia.add(asistenciaEntity);
                     cursor.moveToNext();
                 }
             } else {
-                Log.v(TAG, "Not found postulantes");
+                Log.v(TAG, "Not found asistencia");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            Log.e(TAG, "Error when search postulante");
+            Log.e(TAG, "Error when search asistencia");
         } finally {
             Log.v(TAG, "End getPadronSync");
             cursor.close();
             closeDBHelper();
         }
-        return arrayPostulates;
+        return arrayAsistencia;
     }
 
     public void setDataSync(DataEntity dataEntity) {
         Log.v(TAG, "Start setDatasync");
         try{
             openDBHelper();
-            if (!dataEntity.getPostulantes().isEmpty()){
-                for(PostulanteEntity postulanteEntity : dataEntity.getPostulantes()){
+            if (!dataEntity.getAsistencias().isEmpty()){
+                for(SendAsistenciaEntity asistenciaEntity : dataEntity.getAsistencias()){
                     contentValues = new ContentValues();
-                    contentValues.put("m1_estado", postulanteEntity.getM1_estado());
-                    contentValues.put("m2_estado", postulanteEntity.getM2_estado());
-                    String where = "dni like '" + postulanteEntity.getDni() + "'";
-                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
+                    contentValues.put("asistencia", asistenciaEntity.getAsistencia());
+                    String where = "postulante_id = " + asistenciaEntity.getPostulante_id() + " and version_turno_id = " + asistenciaEntity.getVersion_turno_id() + " and marcacion_id = " + asistenciaEntity.getMarcacion_id();
+                    dbHelper.getDatabase().updateWithOnConflict("postulante_asistencia", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
                 }
                 dbHelper.setTransactionSuccessful();
             } else {

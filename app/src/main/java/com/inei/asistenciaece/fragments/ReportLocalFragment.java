@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.inei.asistenciaece.Business.HorarioBusiness;
 import com.inei.asistenciaece.Business.PadronBusiness;
 import com.inei.asistenciaece.Business.ReportBusiness;
 import com.inei.asistenciaece.R;
@@ -36,6 +37,29 @@ public class ReportLocalFragment extends Fragment {
         return fragment;
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_main, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.action_sync:
+                PadronBusiness padronBusiness = new PadronBusiness(getActivity());
+                padronBusiness.syncDataManual(new BudaCallback() {
+                    @Override
+                    public void callback() {
+                        ReportLocalFragment.showReport();
+                        /*ReportClassesFragment.showReport();*/
+                    }
+                });
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     public ReportLocalFragment() {
     }
 
@@ -45,18 +69,19 @@ public class ReportLocalFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_report, container, false);
         recyclerView = (RecyclerView) view.findViewById(R.id.list_report_item);
         activity = getActivity();
+        setHasOptionsMenu(true);
         showReport();
         return view;
     }
 
     public static void showReport(){
         ReportBusiness reportBusiness = new ReportBusiness(activity.getApplicationContext());
-        ArrayList<ReportItem> reportItems = reportBusiness.getReportLocal();
+        HorarioBusiness horarioBusiness = new HorarioBusiness(activity.getApplicationContext());
+        ArrayList<ReportItem> reportItems = reportBusiness.getReportLocal(horarioBusiness.getHorario());
         if (!reportItems.isEmpty()){
             recyclerView.setLayoutManager(new LinearLayoutManager(activity));
             ReportAdapter reportAdapter = new ReportAdapter(reportItems, activity);
             recyclerView.setAdapter(reportAdapter);
         }
     }
-
 }

@@ -24,14 +24,15 @@ public class AsistenciaDao extends BaseDAO{
         initDBHelper(context);
     }
 
-    public AsistenciaEntity checkPresence(String dni, HorarioEntity horarioEntity, String dateNow, String timeNow, PostulanteEntity postulanteEntity){
-        Log.v(TAG, "Start checkPrensence");
+    public AsistenciaEntity checkPresence(HorarioEntity horarioEntity, String dateNow, String timeNow, PostulanteEntity postulanteEntity){
+        Log.v(TAG, "Start checkPrensence" + horarioEntity.getVersion_turno_id());
         AsistenciaEntity asistenciaEntity = new AsistenciaEntity();
         try{
             openDBHelper();
             String dateTimeStart = horarioEntity.getFecha() + " " + horarioEntity.getHora_inicio();
             String dateTimeFinish = horarioEntity.getFecha() + " " + horarioEntity.getHora_fin();
-            SQL = "select * from postulante_asistencia where dni = '" + dni + "' and (fecha >= date('" + dateTimeStart + "') and fecha <= date('"+ dateTimeFinish + "')";
+            SQL = "select * from postulante_asistencia where postulante_id = '" + postulanteEntity.getId() + "' and (fecha >= datetime('" + dateTimeStart + "') and fecha <= datetime('"+ dateTimeFinish + "'))";
+            Log.v(TAG, SQL);
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()) {
                 asistenciaEntity.setStatus(2);
@@ -41,7 +42,7 @@ public class AsistenciaDao extends BaseDAO{
                 contentValues.put("marcacion_id", horarioEntity.getMarcacion_id());
                 contentValues.put("version_turno_id", horarioEntity.getVersion_turno_id());
                 contentValues.put("asistencia", 1);
-                contentValues.put("fecha", dateNow + "" + timeNow);
+                contentValues.put("fecha", dateNow + " " + timeNow);
                 dbHelper.getDatabase().insert("postulante_asistencia", null, contentValues);
                 dbHelper.setTransactionSuccessful();
                 asistenciaEntity.setStatus(1);

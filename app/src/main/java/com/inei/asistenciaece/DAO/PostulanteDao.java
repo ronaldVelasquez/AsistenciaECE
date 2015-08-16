@@ -109,12 +109,22 @@ public class PostulanteDao extends BaseDAO{
         return postulanteEntity;
     }*/
 
-    public ArrayList<ReportItem> getReportLocal() {
+    public ArrayList<ReportItem> getReportLocal(HorarioEntity horarioEntity) {
         Log.v(TAG, "Start getReport");
         ArrayList<ReportItem> reportItems = new ArrayList<>();
         try {
             openDBHelper();
             SQL = "select distinct " +
+                    "p.numero_de_aula as 'nro_aula', " +
+                    "(select count(1) from postulante where numero_de_aula = p.numero_de_aula group by numero_de_aula) as 'programados', " +
+                    "(select COUNT(1) from postulante p1 inner join postulante_asistencia pa1 on p1.id = pa1.postulante_id where p1.numero_de_aula = p.numero_de_aula and asistencia in(1,2) and marcacion_id = " + horarioEntity.getMarcacion_id() + " and version_turno_id = " + horarioEntity.getVersion_turno_id() + " and (date(pa1.fecha) = '" + horarioEntity.getFecha() + "')) as 'asistencia', " +
+                    "(select count(1) from postulante where numero_de_aula = p.numero_de_aula group by numero_de_aula) - " +
+                    "(select COUNT(1) from postulante p1 inner join postulante_asistencia pa1 on p1.id = pa1.postulante_id where p1.numero_de_aula = p.numero_de_aula and asistencia in(1,2) and marcacion_id = " + horarioEntity.getMarcacion_id() + " and version_turno_id = " + horarioEntity.getVersion_turno_id() + " and (date(pa1.fecha) = '" + horarioEntity.getFecha() + "')) as 'no_asistieron', " +
+                    "(select COUNT(1) from postulante p1 inner join postulante_asistencia pa1 on p1.id = pa1.postulante_id where p1.numero_de_aula = p.numero_de_aula and asistencia = 2 and marcacion_id = " + horarioEntity.getMarcacion_id() + " and version_turno_id = " + horarioEntity.getVersion_turno_id() + " and (date(pa1.fecha) = '" + horarioEntity.getFecha() + "')) as 'sincronizados' " +
+                    "from postulante p " +
+                    "left join postulante_asistencia pa " +
+                    "on p.id = pa.postulante_id order by p.numero_de_aula";
+            /*SQL = "select distinct " +
                     "pos.nro_aula, " +
                     "(select count(*) from postulante where nro_aula=pos.nro_aula group by nro_aula) AS totales, " +
                     "ifnull((select count(nro_aula) from postulante where m1_estado IN(1,2) AND nro_aula=pos.nro_aula group by nro_aula),0) AS registrados, " +
@@ -123,15 +133,15 @@ public class PostulanteDao extends BaseDAO{
                     "from " +
                     "postulante as pos " +
                     "left join local as loc on pos.id_local=loc.id_local " +
-                    "group by pos.m1_estado,pos.nro_aula order by nro_aula";
+                    "group by pos.m1_estado,pos.nro_aula order by nro_aula";*/
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()){
                 while (!cursor.isAfterLast()){
                     ReportItem reportItem = new ReportItem();
                     reportItem.setNroClasses(cursor.getString(cursor.getColumnIndex("nro_aula")));
-                    reportItem.setNroAsign(cursor.getInt(cursor.getColumnIndex("totales")));
-                    reportItem.setNroRegister(cursor.getInt(cursor.getColumnIndex("registrados")));
-                    reportItem.setNroNoRegister(cursor.getInt(cursor.getColumnIndex("no_registrados")));
+                    reportItem.setNroAsign(cursor.getInt(cursor.getColumnIndex("programados")));
+                    reportItem.setNroRegister(cursor.getInt(cursor.getColumnIndex("asistencia")));
+                    reportItem.setNroNoRegister(cursor.getInt(cursor.getColumnIndex("no_asistieron")));
                     reportItem.setNroSync(cursor.getInt(cursor.getColumnIndex("sincronizados")));
                     reportItems.add(reportItem);
                     cursor.moveToNext();
@@ -218,6 +228,7 @@ public class PostulanteDao extends BaseDAO{
         try{
             openDBHelper();
             SQL = "select * from postulante where dni = '" + dni + "'";
+            Log.v(TAG, SQL);
             cursor  = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()){
                 postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
@@ -227,8 +238,8 @@ public class PostulanteDao extends BaseDAO{
                 postulanteEntity.setSede_id(cursor.getString(cursor.getColumnIndex("sede_id")));
                 postulanteEntity.setApellidos_nombres(cursor.getString(cursor.getColumnIndex("apellidos_nombres")));
                 postulanteEntity.setId(cursor.getInt(cursor.getColumnIndex("id")));
-                postulanteEntity.setNumero_aula(cursor.getInt(cursor.getColumnIndex("numero_aula")));
-                postulanteEntity.setNumero_bungalow(cursor.getString(cursor.getColumnIndex("numero_bungalow")));
+                postulanteEntity.setNumero_aula(cursor.getInt(cursor.getColumnIndex("numero_de_aula")));
+                postulanteEntity.setNumero_bungalow(cursor.getString(cursor.getColumnIndex("numero_de_bungalow")));
             } else  {
                 postulanteEntity = null;
             }
@@ -237,6 +248,7 @@ public class PostulanteDao extends BaseDAO{
             Log.v(TAG, "Error database");
             postulanteEntity = null;
         } finally {
+            Log.v(TAG, "End check Postulante");
             cursor.close();
             closeDBHelper();
         }

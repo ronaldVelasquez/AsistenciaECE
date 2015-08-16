@@ -35,7 +35,7 @@ public class HorarioEntity {
         return version_turno_id;
     }
 
-    public void setVersion_turno_id(int version_tuno_id) {
+    public void setVersion_turno_id(int version_turno_id) {
         this.version_turno_id = version_turno_id;
     }
 

@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.inei.asistenciaece.Business.AsistenciaBusiness;
 import com.inei.asistenciaece.Business.CargoBusiness;
 import com.inei.asistenciaece.Business.LocalBusiness;
+import com.inei.asistenciaece.Business.SedeBusiness;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
 import com.inei.asistenciaece.Entity.StatusEntity;
 import com.inei.asistenciaece.R;
@@ -26,6 +27,8 @@ public class PresenceFragment extends Fragment {
     private TextView txtLocation;
     private TextView txtDni;
     private TextView txtClassroom;
+    private TextView txtSede;
+    private TextView txtBungalow;
     private String dni;
 
     public static PresenceFragment newInstance(String title) {
@@ -48,7 +51,10 @@ public class PresenceFragment extends Fragment {
         txtName = (TextView) view.findViewById(R.id.txt_name);
         txtCargo = (TextView) view.findViewById(R.id.txt_cargo);
         txtLocation = (TextView) view.findViewById(R.id.txt_location);
+        txtBungalow = (TextView) view.findViewById(R.id.txt_bungalow);
         txtClassroom = (TextView) view.findViewById(R.id.txt_classroom);
+        txtSede = (TextView) view.findViewById(R.id.txt_sede);
+
         clearDataShow();
         edtxDni.setFocusable(true);
         edtxDni.addTextChangedListener(new TextWatcher() {
@@ -121,12 +127,12 @@ public class PresenceFragment extends Fragment {
                 clearDataShow();
                 break;
             case 4:
-                message = "No se puede registrar porque no hay horario de capacitación";
+                message = "Fuera del rango de horario de registro";
                 view.setBackgroundColor(getResources().getColor(R.color.error_postulante));
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.error_postulante));
                 txtMesssage.setText(message);
-                clearDataShow();
+                fillDataShow(statusEntity.getPostulanteEntity());
                 break;
             case 0:
                 message = "Error";
@@ -134,7 +140,7 @@ public class PresenceFragment extends Fragment {
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.error_postulante));
                 txtMesssage.setText(message);
-                clearDataShow();
+                fillDataShow(statusEntity.getPostulanteEntity());
                 break;
         }
     }
@@ -148,13 +154,19 @@ public class PresenceFragment extends Fragment {
         return localBusiness.getLocal(id_local);
     }
 
+    private String getSede(String id_sede){
+        SedeBusiness sedeBusiness = new SedeBusiness(getActivity().getApplicationContext());
+        return sedeBusiness.getSede(id_sede);
+    }
+
     private void fillDataShow(PostulanteEntity postulanteEntity){
         txtDni.setText(postulanteEntity.getDni());
-        txtName.setText(postulanteEntity.getApe_nom());
-        txtCargo.setText(getCargo(postulanteEntity.getId_cargo()));
-        txtSede.setText(getSede(postulanteEntity.getCod_sede_operativa()));
-        txtLocation.setText(getLocal(postulanteEntity.getId_local()));
-        txtClassroom.setText(postulanteEntity.getNro_aula());
+        txtName.setText(postulanteEntity.getApellidos_nombres());
+        txtCargo.setText(getCargo(postulanteEntity.getCargo_id()));
+        txtSede.setText(getSede(postulanteEntity.getSede_id()));
+        txtBungalow.setText(""+postulanteEntity.getNumero_bungalow());
+        txtLocation.setText(getLocal(postulanteEntity.getLocal_id()));
+        txtClassroom.setText(""+postulanteEntity.getNumero_aula());
     }
 
     private void clearDataShow(){
@@ -162,6 +174,8 @@ public class PresenceFragment extends Fragment {
         txtDni.setText("");
         txtCargo.setText("");
         txtLocation.setText("");
+        txtBungalow.setText("");
+        txtSede.setText("");
         txtClassroom.setText("");
     }
 
