@@ -67,7 +67,7 @@ public class SyncService extends Service {
                         public void callback() {
                             try {
                                 ReportLocalFragment.showReport();
-                                ReportClassesFragment.showReport();
+                                /*ReportClassesFragment.showReport();*/
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }

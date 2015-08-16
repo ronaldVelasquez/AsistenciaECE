@@ -29,11 +29,14 @@
     <string name="hint.label.presence">Message</string>
     <string name="label.name.presence">Apellidos y Nombres :</string>
     <string name="hint.name.presence">Apellidos y Nombres</string>
+    <string name="label.sede.presence">Sede :</string>
+    <string name="hint.sede.presence">Sede</string>
     <string name="label.cargo.presence">Cargo :</string>
     <string name="hint.cargo.presence">Cargo</string>
     <string name="label.location.presence">Local de Capacitación</string>
     <string name="hint.location.presence">Local de Capacitación</string>
     <string name="label.numberClass.presence">Nro de Aula</string>
+    <string name="label.numberBungalow.presence">Bungalow</string>
     <string name="hint.numberClass.presence">Nro</string>
     <string name="label.dni.presence">D.N.I.:</string>
     <string name="hint.dni.presence">D.N.I.</string>

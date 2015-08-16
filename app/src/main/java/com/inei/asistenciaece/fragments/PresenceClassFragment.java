@@ -77,7 +77,7 @@ public class PresenceClassFragment extends Fragment {
                 if (charSequence.length() == 8) {
                     classes = spinner.getSelectedItem().toString();
                     dni = charSequence.toString();
-                    showPostulante(dni, classes);
+                   /* showPostulante(dni, classes);*/
                 }
             }
 
@@ -99,7 +99,7 @@ public class PresenceClassFragment extends Fragment {
         spinner.setAdapter(dataAdapter);
     }
 
-    private void showPostulante(String dni, String aula) {
+    /*private void showPostulante(String dni, String aula) {
         PostulanteBusiness postulanteBusiness = new PostulanteBusiness(getActivity().getApplicationContext());
         PostulanteEntity postulanteEntity = postulanteBusiness.checkPresence(dni, aula);
         String message = "";
@@ -108,7 +108,7 @@ public class PresenceClassFragment extends Fragment {
         Log.e("asdasdasdasdasd", String.valueOf(postulanteEntity.getM2_estado()));
         switch (postulanteEntity.getM2_estado()) {
             case 0:
-                message = "Se registró correctamente";
+                message = "Se registrï¿½ correctamente";
                 view.setBackgroundColor(getResources().getColor(R.color.correct));
                 txtMesssage.setVisibility(View.VISIBLE);
                 txtMesssage.setTextColor(getResources().getColor(R.color.correct));
@@ -159,7 +159,7 @@ public class PresenceClassFragment extends Fragment {
         txtCargo.setText(getCargo(postulanteEntity.getId_cargo()));
         txtLocation.setText(getLocal(postulanteEntity.getId_local()));
         txtClassroom.setText(postulanteEntity.getNro_aula());
-    }
+    }*/
 
     private void clearDataShow() {
         txtName.setText("");

@@ -22,7 +22,7 @@ public class CargoBusiness {
         if (cargoEntity.getCargo_res().isEmpty()){
             cargoName = "Sin Cargo";
         } else {
-            cargoName = cargoEntity.getCargo_res();
+            cargoName = cargoEntity.getCargo();
         }
         return cargoName;
     }

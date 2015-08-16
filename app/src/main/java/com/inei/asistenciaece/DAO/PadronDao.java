@@ -5,13 +5,20 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.inei.asistenciaece.Entity.AsistenciaEntity;
 import com.inei.asistenciaece.Entity.CargoEntity;
+import com.inei.asistenciaece.Entity.SendAsistenciaEntity;
+import com.inei.asistenciaece.Entity.TipoCapacitacionEntity;
 import com.inei.asistenciaece.Entity.DataEntity;
+import com.inei.asistenciaece.Entity.HorarioEntity;
 import com.inei.asistenciaece.Entity.LocalEntity;
+import com.inei.asistenciaece.Entity.MarcacionEntity;
 import com.inei.asistenciaece.Entity.PadronEntity;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
 import com.inei.asistenciaece.Entity.RolEntity;
+import com.inei.asistenciaece.Entity.SedeOperativaEntity;
 import com.inei.asistenciaece.Entity.VersionEntity;
+import com.inei.asistenciaece.Entity.VersionTurnoEntity;
 
 import java.util.ArrayList;
 
@@ -44,16 +51,17 @@ public class PadronDao extends BaseDAO {
                 Log.v(TAG, "Insert postulantes");
                 for (PostulanteEntity postulanteEntity : padronEntity.getPostulantes()) {
                     contentValues = new ContentValues();
-                    contentValues.put("id_local", postulanteEntity.getId_local());
-                    contentValues.put("id_cargo", postulanteEntity.getId_cargo());
+                    contentValues.put("id", postulanteEntity.getId());
+                    contentValues.put("nro_version", postulanteEntity.getNro_version());
+                    contentValues.put("tipo_capacitacion_id", postulanteEntity.getTipo_capacitacion_id());
+                    contentValues.put("local_id", postulanteEntity.getLocal_id());
+                    contentValues.put("cargo_id", postulanteEntity.getCargo_id());
+                    contentValues.put("sede_id", postulanteEntity.getSede_id());
                     contentValues.put("dni", postulanteEntity.getDni());
-                    contentValues.put("ape_nom", postulanteEntity.getApe_nom());
-                    contentValues.put("nro_aula", postulanteEntity.getNro_aula());
-                    contentValues.put("lugar_asigna", postulanteEntity.getLugar_asigna());
-                    contentValues.put("m1_estado", postulanteEntity.getM1_estado());
-                    contentValues.put("m1_fecha", postulanteEntity.getM1_fecha());
-                    contentValues.put("m2_estado", postulanteEntity.getM2_estado());
-                    contentValues.put("m2_fecha", postulanteEntity.getM2_fecha());
+                    contentValues.put("apellidos_nombres", postulanteEntity.getApellidos_nombres());
+                    contentValues.put("numero_de_aula", postulanteEntity.getNumero_aula());
+                    contentValues.put("numero_de_bungalow", postulanteEntity.getNumero_bungalow());
+
                     dbHelper.getDatabase().insertWithOnConflict("postulante", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
                 }
             } else {
@@ -61,9 +69,9 @@ public class PadronDao extends BaseDAO {
             }
 
 //            Insert local
-            if (!padronEntity.getLocal().isEmpty()) {
+            if (!padronEntity.getLocales().isEmpty()) {
                 Log.v(TAG, "Insert local");
-                for (LocalEntity localEntity : padronEntity.getLocal()) {
+                for (LocalEntity localEntity : padronEntity.getLocales()) {
                     contentValues = new ContentValues();
                     contentValues.put("id_local", localEntity.getId_local());
                     contentValues.put("nombre_local", localEntity.getNombre_local());
@@ -75,9 +83,9 @@ public class PadronDao extends BaseDAO {
             }
 
 //            Insert cargo
-            if (!padronEntity.getCargo().isEmpty()) {
+            if (!padronEntity.getCargos().isEmpty()) {
                 Log.v(TAG, "Insert cargo");
-                for (CargoEntity cargoEntity : padronEntity.getCargo()) {
+                for (CargoEntity cargoEntity : padronEntity.getCargos()) {
                     contentValues = new ContentValues();
                     contentValues.put("id_cargo", cargoEntity.getId_cargo());
                     contentValues.put("cargo", cargoEntity.getCargo());
@@ -91,9 +99,9 @@ public class PadronDao extends BaseDAO {
             }
 
 //            Insert Rol
-            if (!padronEntity.getRol().isEmpty()) {
+            if (!padronEntity.getRoles().isEmpty()) {
                 Log.v(TAG, "Insert rol");
-                for (RolEntity rolEntity : padronEntity.getRol()) {
+                for (RolEntity rolEntity : padronEntity.getRoles()) {
                     contentValues = new ContentValues();
                     contentValues.put("idRol", rolEntity.getIdRol());
                     contentValues.put("rol", rolEntity.getRol());
@@ -104,11 +112,83 @@ public class PadronDao extends BaseDAO {
                 Log.v(TAG, "Rol null");
             }
 
+            // Insert version_turno
+            if(!padronEntity.getVersiones_turno().isEmpty()){
+                Log.v(TAG, "Insert version_turno");
+                for (VersionTurnoEntity versionTurnoEntity : padronEntity.getVersiones_turno()){
+                    contentValues = new ContentValues();
+                    contentValues.put("id", versionTurnoEntity.getId());
+                    contentValues.put("numero_de_version", versionTurnoEntity.getNumero_de_version());
+                    contentValues.put("nombre", versionTurnoEntity.getNombre());
+                    dbHelper.getDatabase().insertWithOnConflict("version_turno", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+                }
+            } else {
+                Log.v(TAG, "Version_turno null");
+            }
+
+            // Insert horario
+            if(!padronEntity.getHorarios().isEmpty()){
+                Log.v(TAG, "Insert horarios");
+                for (HorarioEntity horarioEntity : padronEntity.getHorarios()){
+                    contentValues = new ContentValues();
+                    contentValues.put("id", horarioEntity.getId());
+                    contentValues.put("version_turno_id", horarioEntity.getVersion_turno_id());
+                    contentValues.put("tipo_capacitacion_id", horarioEntity.getTipo_capacitacion_id());
+                    contentValues.put("fecha", horarioEntity.getFecha());
+                    contentValues.put("hora_inicio", horarioEntity.getHora_inicio());
+                    contentValues.put("hora_fin", horarioEntity.getHora_fin());
+                    contentValues.put("marcacion_id", horarioEntity.getMarcacion_id());
+                    dbHelper.getDatabase().insertWithOnConflict("horario", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+                }
+            } else {
+                Log.v(TAG, "horario null");
+            }
+
+            // Insert Tipo capacitacion
+            if(!padronEntity.getTipos_capacitacion().isEmpty()){
+                Log.v(TAG, "Insert tipo capacitacion");
+                for (TipoCapacitacionEntity tipoCapacitacionEntity : padronEntity.getTipos_capacitacion()){
+                    contentValues = new ContentValues();
+                    contentValues.put("id", tipoCapacitacionEntity.getId());
+                    contentValues.put("nombre", tipoCapacitacionEntity.getNombre());
+                    contentValues.put("descripcion", tipoCapacitacionEntity.getDescripcion());
+                    dbHelper.getDatabase().insertWithOnConflict("tipo_capacitacion", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+                }
+            } else {
+                Log.v(TAG, "TIPO CAPACITACION NULL");
+            }
+
+            // Insert marcaciones
+            if(!padronEntity.getMarcaciones().isEmpty()){
+                Log.v(TAG, "Insert marcaciones");
+                for (MarcacionEntity marcacionEntity : padronEntity.getMarcaciones()){
+                    contentValues = new ContentValues();
+                    contentValues.put("id", marcacionEntity.getId());
+                    contentValues.put("nombre", marcacionEntity.getNombre());
+                    dbHelper.getDatabase().insertWithOnConflict("marcacion", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+                }
+            } else {
+                Log.v(TAG, "Marcaciones null");
+            }
+
+            // Insert sedes_operativas
+            if(!padronEntity.getSedes_operativas().isEmpty()){
+                Log.v(TAG, "Insert sedes operativas");
+                for (SedeOperativaEntity sedeOperativaEntity : padronEntity.getSedes_operativas()){
+                    contentValues = new ContentValues();
+                    contentValues.put("cod_sede_operativa", sedeOperativaEntity.getCod_sede_operativa());
+                    contentValues.put("sede_operativa", sedeOperativaEntity.getSede_operativa());
+                    dbHelper.getDatabase().insertWithOnConflict("sede_operativa", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
+                }
+            } else {
+                Log.v(TAG, "Marcaciones null");
+            }
+
 //            Insert Version
             Log.v(TAG, "Insert version");
             VersionEntity versionEntity = padronEntity.getVersion();
             contentValues = new ContentValues();
-            contentValues.put("nro_version", versionEntity.getNro_version());
+            contentValues.put("numero_de_version", versionEntity.getNumero_de_version());
             contentValues.put("usuarioCrea", versionEntity.getUsuarioCrea());
             contentValues.put("fechaCrea", versionEntity.getFechaCrea());
             dbHelper.getDatabase().insertWithOnConflict("version", null, contentValues, SQLiteDatabase.CONFLICT_IGNORE);
@@ -133,6 +213,12 @@ public class PadronDao extends BaseDAO {
             dbHelper.getDatabase().delete("rol", null, null);
             dbHelper.getDatabase().delete("cargo", null, null);
             dbHelper.getDatabase().delete("local", null, null);
+            dbHelper.getDatabase().delete("version_turno", null, null);
+            dbHelper.getDatabase().delete("horario", null, null);
+            dbHelper.getDatabase().delete("tipo_capacitacion", null, null);
+            dbHelper.getDatabase().delete("marcacion", null, null);
+            dbHelper.getDatabase().delete("sede_operativa", null, null);
+            dbHelper.getDatabase().delete("postulante_asistencia", null, null);
         } catch (Exception ex) {
             ex.printStackTrace();
             Log.e(TAG, "Error when deleted padron");
@@ -140,54 +226,48 @@ public class PadronDao extends BaseDAO {
         }
     }
 
-    public ArrayList<PostulanteEntity> getPadronSync() {
-        ArrayList<PostulanteEntity> arrayPostulates = new ArrayList<>();
+    public ArrayList<SendAsistenciaEntity> getPadronSync() {
+        ArrayList<SendAsistenciaEntity> arrayAsistencia = new ArrayList<>();
         Log.v(TAG, "Start get PadronSync");
         try {
             openDBHelper();
-            SQL = "select * from postulante where m1_estado = " + 1 + " or m2_estado = " + 1;
+            SQL = "select * from postulante_asistencia where asistencia = " + 1;
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()) {
                 while (!cursor.isAfterLast()) {
-                    PostulanteEntity postulanteEntity = new PostulanteEntity();
-                    postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
-                    postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
-                    postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
-                    postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
-                    postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
-                    postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m1_estado")));
-                    postulanteEntity.setM1_estado(cursor.getInt(cursor.getColumnIndex("m2_estado")));
-                    postulanteEntity.setLugar_asigna(cursor.getString(cursor.getColumnIndex("lugar_asigna")));
-                    postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m1_fecha")));
-                    postulanteEntity.setM1_fecha(cursor.getString(cursor.getColumnIndex("m2_fecha")));
-                    arrayPostulates.add(postulanteEntity);
+                    SendAsistenciaEntity asistenciaEntity = new SendAsistenciaEntity();
+                    asistenciaEntity.setPostulante_id(cursor.getInt(cursor.getColumnIndex("postulante_id")));
+                    asistenciaEntity.setMarcacion_id(cursor.getInt(cursor.getColumnIndex("marcacion_id")));
+                    asistenciaEntity.setAsistencia(cursor.getInt(cursor.getColumnIndex("asistencia")));
+                    asistenciaEntity.setFecha(cursor.getString(cursor.getColumnIndex("fecha")));
+                    asistenciaEntity.setVersion_turno_id(cursor.getInt(cursor.getColumnIndex("version_turno_id")));
+                    arrayAsistencia.add(asistenciaEntity);
                     cursor.moveToNext();
                 }
             } else {
-                Log.v(TAG, "Not found postulantes");
+                Log.v(TAG, "Not found asistencia");
             }
         } catch (Exception ex) {
             ex.printStackTrace();
-            Log.e(TAG, "Error when search postulante");
+            Log.e(TAG, "Error when search asistencia");
         } finally {
             Log.v(TAG, "End getPadronSync");
             cursor.close();
             closeDBHelper();
         }
-        return arrayPostulates;
+        return arrayAsistencia;
     }
 
     public void setDataSync(DataEntity dataEntity) {
         Log.v(TAG, "Start setDatasync");
         try{
             openDBHelper();
-            if (!dataEntity.getPostulantes().isEmpty()){
-                for(PostulanteEntity postulanteEntity : dataEntity.getPostulantes()){
+            if (!dataEntity.getAsistencias().isEmpty()){
+                for(SendAsistenciaEntity asistenciaEntity : dataEntity.getAsistencias()){
                     contentValues = new ContentValues();
-                    contentValues.put("m1_estado", postulanteEntity.getM1_estado());
-                    contentValues.put("m2_estado", postulanteEntity.getM2_estado());
-                    String where = "dni like '" + postulanteEntity.getDni() + "'";
-                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
+                    contentValues.put("asistencia", asistenciaEntity.getAsistencia());
+                    String where = "postulante_id = " + asistenciaEntity.getPostulante_id() + " and version_turno_id = " + asistenciaEntity.getVersion_turno_id() + " and marcacion_id = " + asistenciaEntity.getMarcacion_id();
+                    dbHelper.getDatabase().updateWithOnConflict("postulante_asistencia", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
                 }
                 dbHelper.setTransactionSuccessful();
             } else {

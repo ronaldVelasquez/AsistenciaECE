@@ -124,14 +124,14 @@ public class MainActivity extends AppCompatActivity {
                 fragment = PresenceFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
-            case "Asistencia en Aula":
+            /*case "Asistencia en Aula":
                 args.putString(com.inei.asistenciaece.fragments.PresenceClassFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceClassFragment.newInstance(title);
                 fragment.setArguments(args);
-                break;
+                break;*/
             case "Reportes":
-                args.putString(ReportMainFragment.ARG_SECTION_TITLE, title);
-                fragment = ReportMainFragment.newInstance(title);
+                args.putString(com.inei.asistenciaece.fragments.ReportLocalFragment.ARG_SECTION_TITLE , title);
+                fragment = ReportLocalFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
             case "Consolidado":
