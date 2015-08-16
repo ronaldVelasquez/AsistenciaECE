@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Asistencia ECE 2015</string>
+    <string name="app_name">Asistencia Ancón</string>
 
     <!--Login Activity-->
     <string name="title.login">Sistema de Control de Asistencia</string>
