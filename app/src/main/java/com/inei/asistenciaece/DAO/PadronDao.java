@@ -266,7 +266,7 @@ public class PadronDao extends BaseDAO {
                 for(SendAsistenciaEntity asistenciaEntity : dataEntity.getAsistencias()){
                     contentValues = new ContentValues();
                     contentValues.put("asistencia", asistenciaEntity.getAsistencia());
-                    String where = "postulante_id = " + asistenciaEntity.getPostulante_id() + " and version_turno_id = " + asistenciaEntity.getVersion_turno_id() + " and marcacion_id = " + asistenciaEntity.getMarcacion_id();
+                    String where = "postulante_id = " + asistenciaEntity.getPostulante_id() + " and version_turno_id = " + asistenciaEntity.getVersion_turno_id() + " and marcacion_id = " + asistenciaEntity.getMarcacion_id() + " and fecha = '" + asistenciaEntity.getFecha() + "'";
                     dbHelper.getDatabase().updateWithOnConflict("postulante_asistencia", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
                 }
                 dbHelper.setTransactionSuccessful();
