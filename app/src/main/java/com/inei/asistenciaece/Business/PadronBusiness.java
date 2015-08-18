@@ -70,7 +70,7 @@ public class PadronBusiness {
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ConstantsUtils.URL_SYNC_PADRON, new JSONObject(parameters), new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        Log.v(TAG, "json: " + jsonObject.toString());
+                        Log.v(TAG, "DATA DEVUELTA: " + jsonObject.toString());
                         DataEntity dataEntity1 = gson.fromJson(jsonObject.toString(), DataEntity.class);
                         padronDao.setDataSync(dataEntity1);
                         if (budaCallback != null) {
@@ -110,7 +110,7 @@ public class PadronBusiness {
                 JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, ConstantsUtils.URL_SYNC_PADRON, new JSONObject(parameters), new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject jsonObject) {
-                        Log.v(TAG, "json: " + jsonObject.toString());
+                        Log.v(TAG, "DATA DEVUELTA: " + jsonObject.toString());
                         DataEntity dataEntity1 = gson.fromJson(jsonObject.toString(), DataEntity.class);
                         padronDao.setDataSync(dataEntity1);
                         progressDialog.dismiss();
