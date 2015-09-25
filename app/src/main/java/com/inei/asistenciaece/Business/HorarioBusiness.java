@@ -18,9 +18,9 @@ public class HorarioBusiness {
         horarioDao = horarioDao.getInstance(context);
     }
 
-    public HorarioEntity getHorario() {
+    public HorarioEntity getHorario(int marcacionId) {
         String dateTime = DateFormatUtil.getDateTime();
-        HorarioEntity horarioEntity = horarioDao.getHorario(dateTime);
+        HorarioEntity horarioEntity = horarioDao.getHorario(dateTime, marcacionId);
         return horarioEntity;
     }
 }

@@ -8,6 +8,7 @@
     <string name="hint.edtx_password">Ingresar Contraseña</string>
     <string name="hint.edtx_username">Ingresar usuario</string>
     <string name="btn.login">Ingresar</string>
+    <string name="app.version">v1.3</string>
     
     <!--Padron Activity-->
     <string name="title_activity_padron">PadronActivity</string>

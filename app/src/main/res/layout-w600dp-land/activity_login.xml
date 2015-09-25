@@ -91,4 +91,13 @@
         android:layout_margin="20dp"
         android:textSize="20sp" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/txt_app_version"
+        android:text="@string/app.version"
+        android:layout_alignBottom="@+id/btn_login"
+        android:layout_alignParentEnd="true" />
+
 </RelativeLayout>

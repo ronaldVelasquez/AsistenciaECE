@@ -65,9 +65,9 @@ public class PostulanteDao extends BaseDAO{
             closeDBHelper();
         }
         return postulanteEntity;
-    }*/
+    }
 
-   /* public PostulanteEntity checkPresence(String dni, String aula){
+    public PostulanteEntity checkPresence(String dni, String aula){
         Log.v(TAG, "Star checkPrensence");
         PostulanteEntity postulanteEntity = new PostulanteEntity();
         try{

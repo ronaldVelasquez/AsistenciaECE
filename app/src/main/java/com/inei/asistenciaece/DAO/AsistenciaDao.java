@@ -31,7 +31,7 @@ public class AsistenciaDao extends BaseDAO{
             openDBHelper();
             String dateTimeStart = horarioEntity.getFecha() + " " + horarioEntity.getHora_inicio();
             String dateTimeFinish = horarioEntity.getFecha() + " " + horarioEntity.getHora_fin();
-            SQL = "select * from postulante_asistencia where postulante_id = '" + postulanteEntity.getId() + "' and (fecha >= datetime('" + dateTimeStart + "') and fecha <= datetime('"+ dateTimeFinish + "'))";
+            SQL = "select * from postulante_asistencia where postulante_id = '" + postulanteEntity.getId() + "' and (fecha >= datetime('" + dateTimeStart + "') and fecha <= datetime('"+ dateTimeFinish + "')) and marcacion_id = " + horarioEntity.getMarcacion_id();
             Log.v(TAG, SQL);
             cursor = dbHelper.getDatabase().rawQuery(SQL, null);
             if (cursor.moveToFirst()) {

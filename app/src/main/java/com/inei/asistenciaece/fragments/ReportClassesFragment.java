@@ -45,9 +45,14 @@ public class ReportClassesFragment extends Fragment {
     }
 
     public static void showReport(){
+        /**
+         * TODO
+         * Marcacion id = 2 for presence in class
+         * horarioBusiness.getHorario(2)
+         * */
         ReportBusiness reportBusiness = new ReportBusiness(activity.getApplicationContext());
         HorarioBusiness horarioBusiness = new HorarioBusiness(activity.getApplicationContext());
-        ArrayList<ReportItem> reportItems = reportBusiness.getReportClasses(horarioBusiness.getHorario());
+        ArrayList<ReportItem> reportItems = reportBusiness.getReportClasses(horarioBusiness.getHorario(2));
         if (!reportItems.isEmpty()){
             recyclerView.setLayoutManager(new LinearLayoutManager(activity));
             ReportAdapter reportAdapter = new ReportAdapter(reportItems, activity);
