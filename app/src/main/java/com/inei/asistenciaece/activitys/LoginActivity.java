@@ -3,11 +3,13 @@ package com.inei.asistenciaece.activitys;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
@@ -35,6 +37,7 @@ public class LoginActivity extends Activity {
     private EditText edtxPassword;
     private EditText edtxUsername;
     private ProgressDialog progressDialog;
+    private TextView txtVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +50,7 @@ public class LoginActivity extends Activity {
             startActivity(intent);
         }
         btnLogin = (Button) findViewById(R.id.btn_login);
+        txtVersion = (TextView) findViewById(R.id.txt_app_version);
         edtxPassword = (EditText) findViewById(R.id.edtx_password);
         edtxUsername = (EditText) findViewById(R.id.edtx_username);
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +72,13 @@ public class LoginActivity extends Activity {
                 }
             }
         });
+
+        try {
+            String version = this.getPackageManager().getPackageInfo(this.getPackageName(), 0).versionName;
+            txtVersion.setText("Verrsión " + version);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void sendRequest(final String password, final String username) {
@@ -105,8 +116,8 @@ public class LoginActivity extends Activity {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
                 Log.e(TAG, volleyError.toString());
-                if(volleyError instanceof NoConnectionError){
-                    UserBusiness userBusiness = new UserBusiness(getApplicationContext());
+                if (volleyError instanceof NoConnectionError) {
+                    UserBusiness userBusiness = new UserBusiness(LoginActivity.this.getApplicationContext());
                     progressDialog.dismiss();
                     userBusiness.searchUser(password, username);
                 } else {

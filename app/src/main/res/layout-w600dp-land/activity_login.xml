@@ -96,7 +96,9 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:id="@+id/txt_app_version"
-        android:text="@string/app.version"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:hint="version"
         android:layout_alignBottom="@+id/btn_login"
         android:layout_alignParentEnd="true" />
 

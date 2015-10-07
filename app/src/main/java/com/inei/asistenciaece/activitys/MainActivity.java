@@ -141,6 +141,11 @@ public class MainActivity extends AppCompatActivity {
                 fragment = ConsolidatedFragment.newInstance(title, password, username);
                 fragment.setArguments(args);
                 break;
+            case "Acerca de":
+                args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_SECTION_TITLE, title);
+                fragment = ConsolidatedFragment.newInstance(title, password, username);
+                fragment.setArguments(args);
+                break;
             default:
                 args.putString(PresenceFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceFragment.newInstance(title);

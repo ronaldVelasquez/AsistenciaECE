@@ -47,7 +47,7 @@
         android:layout_margin="10dp"
         android:hint="@string/hint.edtx_dni"
         android:inputType="number"
-        android:maxLength="10"
+        android:maxLength="8"
         android:nextFocusDown="@+id/edtx_dni"
         android:textSize="20sp"
         app:met_baseColor="@color/primary.dark"

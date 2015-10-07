@@ -3,7 +3,8 @@ package com.inei.asistenciaece.Utils;
 import java.util.HashMap;
 
 public class ConstantsUtils {
-    public static final String HOSTNAME     = "http://capacitacion.amautas.net";
+//    public static final String HOSTNAME     = "http://capacitacion.amautas.net";
+    public static final String HOSTNAME     = "http://172.16.100.61/ece_capacitacion";
     public static final String URL_LOGIN    = HOSTNAME + "/tablet-login";
     public static final String URL_VERSION  = HOSTNAME + "/tablet-version";
     public static final String URL_CONSOLIDATED = HOSTNAME + "/dashboard";
