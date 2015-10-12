@@ -93,6 +93,7 @@ public class UserDao extends BaseDAO {
             openDBHelper();
             Log.v(TAG, "Start delete usuario");
             dbHelper.getDatabase().delete( "usuario", null, null );
+            dbHelper.setTransactionSuccessful();
         }catch (Exception e){
             Log.e(TAG, "Error delete Usuario");
             e.printStackTrace();
@@ -101,4 +102,6 @@ public class UserDao extends BaseDAO {
             Log.v(TAG, "End delete Usuario");
         }
     }
+
+
 }

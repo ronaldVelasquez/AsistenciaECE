@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txt_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="5dp"
+            android:text="@string/title.login"
+            android:textColor="@color/primary.dark"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/txt_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_title"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:text="@string/subtitle.login"
+            android:textColor="@color/primary.dark"
+            android:textSize="20sp" />
+
+        <ImageView
+            android:id="@+id/img_logo"
+            android:layout_width="120dp"
+            android:layout_height="110dp"
+            android:layout_below="@+id/txt_subtitle"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="10dp"
+            android:contentDescription="@string/image.login.description"
+            android:src="@drawable/logo_inei" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_logo"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:hint="@string/hint.edtx_username"
+            android:inputType="text"
+            android:maxLength="20"
+            android:textSize="25sp"
+            app:met_baseColor="@color/primary.dark"
+            app:met_errorColor="@color/error"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="20"
+            app:met_primaryColor="@color/primary"
+            app:met_textColorHint="@color/hint" />
+
+        <com.rengwuxian.materialedittext.MaterialEditText
+            android:id="@+id/edtx_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtx_username"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="5dp"
+            android:hint="@string/hint.edtx_password"
+            android:inputType="textPassword"
+            android:maxLength="10"
+            android:textSize="25sp"
+            app:met_baseColor="@color/primary.dark"
+            app:met_errorColor="@color/error"
+            app:met_floatingLabel="highlight"
+            app:met_maxCharacters="10"
+            app:met_primaryColor="@color/primary"
+            app:met_textColorHint="@color/hint" />
+
+       <!-- <Button
+            android:id="@+id/btn_login"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtx_password"
+            android:layout_centerHorizontal="true"
+            android:layout_margin="20dp"
+            android:background="@color/primary"
+            android:text="@string/btn.login"
+            android:textColor="@color/white"
+            android:textSize="20sp" />-->
+    <com.dd.CircularProgressButton
+        android:id="@+id/btn_login"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtx_password"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="20dp"
+        android:background="@color/primary"
+        android:text="@string/btn.login"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        app:cpb_colorIndicator="@color/primary"
+        app:cpb_iconComplete="@drawable/ic_check_white_36dp"
+        app:cpb_selectorComplete="@drawable/background_primary"
+        app:cpb_selectorIdle="@drawable/background_primary"
+        app:cpb_textError="Ups"
+        app:cpb_textIdle="Login" />
+
+
+        <TextView
+            android:id="@+id/txt_app_version"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/btn_login"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:hint="version"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+</RelativeLayout>

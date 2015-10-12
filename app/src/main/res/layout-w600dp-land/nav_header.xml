@@ -1,38 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/header_height"
     android:background="@drawable/inei_logo"
     android:gravity="bottom"
+    android:padding="0dp"
+    android:layout_margin="0dp"
     android:orientation="vertical"
-    android:padding="@dimen/header_left_padding"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <TextView
         android:id="@+id/label_app_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/primary"
+        android:layout_marginBottom="5dp"
         android:gravity="center_horizontal"
         android:text="@string/title.navHeader"
-        android:layout_marginBottom="5dp"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+        android:textColor="@color/primary"
         android:textStyle="bold" />
 
     <View
         android:id="@+id/view"
         android:layout_width="fill_parent"
         android:layout_height="1dp"
+        android:padding="0dp"
+        android:layout_margin="0dp"
         android:background="@color/bright_foreground_disabled_material_light" />
 
     <!-- Correo de la cuenta -->
-   <!-- <TextView
-        android:id="@+id/email"
-        style="@style/Widget.AppCompat.Spinner"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/email_navdrawer"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />-->
-
+    <!-- <TextView
+         android:id="@+id/email"
+         style="@style/Widget.AppCompat.Spinner"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:text="@string/email_navdrawer"
+         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />-->
 </LinearLayout>

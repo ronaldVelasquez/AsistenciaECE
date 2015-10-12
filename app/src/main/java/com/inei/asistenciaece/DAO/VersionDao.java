@@ -71,6 +71,7 @@ public class VersionDao extends BaseDAO {
             openDBHelper();
             Log.v(TAG, "Start delete Version");
             dbHelper.getDatabase().delete( "version", null, null );
+            dbHelper.setTransactionSuccessful();
         }catch (Exception e){
             Log.e(TAG, "Error delete Version");
             e.printStackTrace();

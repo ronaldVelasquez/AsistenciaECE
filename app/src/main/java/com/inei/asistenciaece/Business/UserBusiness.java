@@ -6,6 +6,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.inei.asistenciaece.DAO.UserDao;
+import com.inei.asistenciaece.DAO.VersionDao;
 import com.inei.asistenciaece.Entity.UserEntity;
 import com.inei.asistenciaece.activitys.MainActivity;
 import com.inei.asistenciaece.Utils.SessionManager;
@@ -15,14 +16,21 @@ public class UserBusiness {
     private Context context;
     private UserDao userDao;
     private SessionManager sessionManager;
+    private VersionDao versionDao;
 
     public UserBusiness(Context context) {
         this.context = context;
         userDao = UserDao.getInstance(context);
+        versionDao = VersionDao.getInstance(context);
     }
 
     public void addUser(UserEntity userEntity){
         Log.v(TAG, "Start addUser");
+        if (userDao.searchUser(userEntity.getPassword(), userEntity.getUsuario()) == null){
+            Log.d(TAG, "Delete User");
+            userDao.deleteUser();
+            versionDao.deleteVersion();
+        }
         boolean flag = userDao.addUser(userEntity);
         if(flag){
             sessionManager = new SessionManager(context);

@@ -43,6 +43,7 @@ public class VersionBusiness {
                     Gson gson = new Gson();
                     versionEntity = gson.fromJson(jsonObject.getJSONObject("version").toString(), VersionEntity.class);
                     int localVersion = getNroVersionLocal();
+                    Log.d("Local Version" , String.valueOf(localVersion));
                     if(localVersion < versionEntity.getNumero_de_version()){
                         Intent intent = new Intent(context, PadronActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

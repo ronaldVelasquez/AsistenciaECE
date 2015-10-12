@@ -16,6 +16,7 @@ import android.view.MenuItem;
 
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.SessionManager;
+import com.inei.asistenciaece.fragments.AboutFragment;
 import com.inei.asistenciaece.fragments.ConsolidatedFragment;
 import com.inei.asistenciaece.fragments.PresenceClassFragment;
 import com.inei.asistenciaece.fragments.PresenceFragment;
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
-                break;
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -142,8 +143,8 @@ public class MainActivity extends AppCompatActivity {
                 fragment.setArguments(args);
                 break;
             case "Acerca de":
-                args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_SECTION_TITLE, title);
-                fragment = ConsolidatedFragment.newInstance(title, password, username);
+                args.putString(com.inei.asistenciaece.fragments.AboutFragment.ARG_SECTION_TITLE, title);
+                fragment = AboutFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
             default:

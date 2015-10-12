@@ -94,6 +94,7 @@ public class PadronBusiness {
     public void syncDataManual(final BudaCallback budaCallback) {
         final ProgressDialog progressDialog = new ProgressDialog(context);
         progressDialog.setMessage("Enviando Datos");
+        progressDialog.setIndeterminate(true);
         ArrayList<SendAsistenciaEntity> arrayAsistencia = padronDao.getPadronSync();
         if (arrayAsistencia.isEmpty()) {
             Log.v(TAG, "Data Not found");

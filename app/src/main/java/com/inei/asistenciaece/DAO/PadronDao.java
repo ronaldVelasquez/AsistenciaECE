@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-import com.inei.asistenciaece.Entity.AsistenciaEntity;
 import com.inei.asistenciaece.Entity.CargoEntity;
 import com.inei.asistenciaece.Entity.SendAsistenciaEntity;
 import com.inei.asistenciaece.Entity.TipoCapacitacionEntity;
