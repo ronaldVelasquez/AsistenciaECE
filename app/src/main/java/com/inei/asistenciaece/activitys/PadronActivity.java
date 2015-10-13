@@ -52,7 +52,7 @@ public class PadronActivity extends Activity {
         HashMap<String, Object> user = sessionManager.getUserDetails();
         idLocal = (int) user.get(SessionManager.KEY_ID_LOCAL);
         coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
-//        Instace progress dialog
+//        Instance progress dialog
         progressDialog = new ProgressDialog(PadronActivity.this);
         progressDialog.setMessage("Descargando Padron");
         progressDialog.setIndeterminate(true);
@@ -65,7 +65,7 @@ public class PadronActivity extends Activity {
         textView.setTextColor(Color.WHITE);
 
 
-//        declare imagebutton
+//        declare imageButton
         imageButton = (ImageButton) findViewById(R.id.img_btn_download);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override

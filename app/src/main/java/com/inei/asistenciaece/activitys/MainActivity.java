@@ -20,7 +20,6 @@ import com.inei.asistenciaece.fragments.AboutFragment;
 import com.inei.asistenciaece.fragments.ConsolidatedFragment;
 import com.inei.asistenciaece.fragments.PresenceClassFragment;
 import com.inei.asistenciaece.fragments.PresenceFragment;
-import com.inei.asistenciaece.fragments.ReportLocalFragment;
 import com.inei.asistenciaece.fragments.ReportMainFragment;
 
 import java.util.HashMap;
@@ -97,11 +96,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (!drawerLayout.isDrawerOpen(GravityCompat.START)) {
-            //getMenuInflater().inflate(R.menu.menu_main, menu);
-            return true;
-        }
-        return super.onCreateOptionsMenu(menu);
+       getMenuInflater().inflate(R.menu.menu_main, menu);
+       return true;
     }
 
     @Override
