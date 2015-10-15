@@ -99,7 +99,7 @@
         app:cpb_selectorComplete="@drawable/background_primary"
         app:cpb_selectorIdle="@drawable/background_primary"
         app:cpb_textError="Ups"
-        app:cpb_textIdle="Login" />
+        app:cpb_textIdle="@string/btn.login" />
 
 
         <TextView

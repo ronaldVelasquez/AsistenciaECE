@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.NoConnectionError;
 import com.android.volley.Request;
@@ -39,7 +38,6 @@ public class LoginActivity extends Activity {
     private EditText edtxPassword;
     private EditText edtxUsername;
     private CircularProgressButton btnLogin;
-    private CoordinatorLayout coordinatorLayout;
     private Snackbar snackbar;
 
 
@@ -57,7 +55,7 @@ public class LoginActivity extends Activity {
         TextView txtVersion = (TextView) findViewById(R.id.txt_app_version);
         edtxPassword = (EditText) findViewById(R.id.edtx_password);
         edtxUsername = (EditText) findViewById(R.id.edtx_username);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
         btnLogin.setIndeterminateProgressMode(true);
 
         snackbar = Snackbar.make(coordinatorLayout, "", Snackbar.LENGTH_LONG)

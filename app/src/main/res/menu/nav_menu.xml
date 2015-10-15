@@ -29,5 +29,58 @@
             android:icon="@drawable/ic_info_black_36dp"
             android:title="@string/info.item"
             />
+
     </group>
+    <!--<item
+        android:id="@+id/nav_submenu_moments"
+        android:title="@string/moments">
+        <group android:checkableBehavior="single">
+            <menu>
+                <item
+                    android:id="@+id/nav_present"
+                    android:icon="@drawable/ic_check_box_black_24dp"
+                    android:checked="true"
+                    android:title="@string/present.item" />
+                <item
+                    android:id="@+id/nav_present_classes"
+                    android:icon="@drawable/ic_check_box_black_24dp"
+                    android:title="@string/present.classes.item" />
+            </menu>
+        </group>
+    </item>
+    <item
+        android:id="@+id/nav_submenu_reports"
+        android:title="@string/reports">
+        <group android:checkableBehavior="single">
+            <menu>
+                <item
+                    android:id="@+id/nav_report"
+                    android:icon="@drawable/ic_description_black_24dp"
+                    android:title="@string/report.item"/>
+                <item
+                    android:id="@+id/nav_solid"
+                    android:icon="@drawable/ic_http_black_24dp"
+                    android:title="@string/solid.item" />
+            </menu>
+        </group>
+    </item>
+    <item
+        android:id="@+id/nav_submenu_others"
+        android:title="@string/others">
+        <group android:checkableBehavior="single">
+            <menu>
+
+                <item
+                    android:id="@+id/nav_info"
+                    android:icon="@drawable/ic_info_black_36dp"
+                    android:title="@string/info.item"
+                    />
+                <item
+                    android:id="@+id/nav_close_session"
+                    android:icon="@drawable/ic_exit_to_app_black_24dp"
+                    android:title="@string/close_session.item"
+                    />
+            </menu>
+        </group>
+    </item>-->
 </menu>

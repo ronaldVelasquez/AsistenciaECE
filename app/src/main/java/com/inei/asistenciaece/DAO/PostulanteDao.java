@@ -1,13 +1,10 @@
 package com.inei.asistenciaece.DAO;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.inei.asistenciaece.Entity.HorarioEntity;
 import com.inei.asistenciaece.Entity.PostulanteEntity;
-import com.inei.asistenciaece.Utils.DateFormatUtil;
 import com.inei.asistenciaece.Utils.ReportItem;
 
 import java.util.ArrayList;
@@ -27,87 +24,6 @@ public class PostulanteDao extends BaseDAO{
     public PostulanteDao(Context context) {
         initDBHelper(context);
     }
-
-    /*public PostulanteEntity checkPresence(String dni, HorarioEntity horarioEntity, String dateNow, String timeNow){
-        Log.v(TAG, "Star checkPrensence");
-        PostulanteEntity postulanteEntity = new PostulanteEntity();
-        try{
-            openDBHelper();
-            String dateTimeStart = horarioEntity.getFecha() + " " + horarioEntity.getHora_inicio();
-            String dateTimeFinish = horarioEntity.getFecha() + " " + horarioEntity.getHora_fin();
-            SQL = "select * from postulante_asistencia where dni = '" + dni + "' and (fecha >= date('" + dateTimeStart + "') and fecha <= date('"+ dateTimeFinish + "')";
-            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
-            if (cursor.moveToFirst()){
-                postulanteEntity.
-
-                if (postulanteEntity.getM1_estado() == 0){
-                    Log.v(TAG, "Checking Presence");
-                    contentValues = new ContentValues();
-                    contentValues.put("m1_estado", 1);
-                    contentValues.put("m1_fecha", DateFormatUtil.getDate());
-                    String where = "dni like '" + dni + "'";
-                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
-                    dbHelper.setTransactionSuccessful();
-                } else {
-                    Log.v(TAG, "Checked Presence");
-                }
-            } else {
-                postulanteEntity.setM1_estado(3);
-                Log.v(TAG, "Postulante not found");
-            }
-        } catch (Exception ex) {
-            postulanteEntity.setM1_estado(4);
-            ex.printStackTrace();
-            Log.e(TAG, "Error database");
-        } finally {
-            Log.v(TAG, "End checkPresence");
-            cursor.close();
-            closeDBHelper();
-        }
-        return postulanteEntity;
-    }
-
-    public PostulanteEntity checkPresence(String dni, String aula){
-        Log.v(TAG, "Star checkPrensence");
-        PostulanteEntity postulanteEntity = new PostulanteEntity();
-        try{
-            openDBHelper();
-            SQL = "select * from postulante where dni like '" + dni + "'" + "and nro_aula like '" + aula + "'";
-            cursor = dbHelper.getDatabase().rawQuery(SQL, null);
-            if (cursor.moveToFirst()){
-                postulanteEntity.setM2_estado(cursor.getInt(cursor.getColumnIndex("m2_estado")));
-                postulanteEntity.setId_cargo(cursor.getInt(cursor.getColumnIndex("id_cargo")));
-                postulanteEntity.setId_local(cursor.getInt(cursor.getColumnIndex("id_local")));
-                postulanteEntity.setDni(cursor.getString(cursor.getColumnIndex("dni")));
-                postulanteEntity.setApe_nom(cursor.getString(cursor.getColumnIndex("ape_nom")));
-                postulanteEntity.setNro_aula(cursor.getString(cursor.getColumnIndex("nro_aula")));
-
-                if (postulanteEntity.getM2_estado() == 0){
-                    Log.v(TAG, "Checking Presence");
-                    contentValues = new ContentValues();
-                    contentValues.put("m2_estado", 1);
-                    contentValues.put("m2_fecha", DateFormatUtil.getDate());
-                    String where = "dni like '" + dni + "'";
-                    dbHelper.getDatabase().updateWithOnConflict("postulante", contentValues, where, null, SQLiteDatabase.CONFLICT_IGNORE);
-                    dbHelper.setTransactionSuccessful();
-                } else {
-                    Log.v(TAG, "Checked Presence");
-                }
-            } else {
-                postulanteEntity.setM2_estado(3);
-                Log.v(TAG, "Postulante not found");
-            }
-        } catch (Exception ex) {
-            postulanteEntity.setM2_estado(4);
-            ex.printStackTrace();
-            Log.e(TAG, "Error database");
-        } finally {
-            Log.v(TAG, "End checkPresence");
-            cursor.close();
-            closeDBHelper();
-        }
-        return postulanteEntity;
-    }*/
 
     public ArrayList<ReportItem> getReportLocal(HorarioEntity horarioEntity) {
         Log.v(TAG, "Start getReport");
@@ -289,5 +205,68 @@ public class PostulanteDao extends BaseDAO{
         }
         return postulanteEntity;
 
+    }
+
+    public int getAllPostutlantes(){
+        int total = 0;
+        Log.v(TAG, "Start getAllPostutlantes");
+        try{
+            openDBHelper();
+            SQL = "select count(*) as total from postulante ";
+            Log.v(TAG, SQL);
+            cursor  = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst())
+                total = cursor.getInt(cursor.getColumnIndex("total"));
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Log.v(TAG, "Error database");
+        } finally {
+            Log.v(TAG, "End getAllPostutlantes");
+            cursor.close();
+            closeDBHelper();
+        }
+        return total;
+    }
+
+    public int getTotalRegistrado(HorarioEntity horarioEntity){
+        int total = 0;
+        Log.v(TAG, "Start getTotalRegistrado");
+        try{
+            openDBHelper();
+            SQL = "select count(*) as total from postulante_asistencia where asistencia in(1,2) and marcacion_id = 1 and version_turno_id = " + horarioEntity.getVersion_turno_id() + " and (date(fecha) = '" + horarioEntity.getFecha() + "')";
+            Log.v(TAG, SQL);
+            cursor  = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst())
+                total = cursor.getInt(cursor.getColumnIndex("total"));
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Log.v(TAG, "Error database");
+        } finally {
+            Log.v(TAG, "End getTotalRegistrado");
+            cursor.close();
+            closeDBHelper();
+        }
+        return total;
+    }
+
+    public int getTotalSincronizado(HorarioEntity horarioEntity) {
+        int total = 0;
+        Log.v(TAG, "Start getTotalSincronizado");
+        try{
+            openDBHelper();
+            SQL = "select count(*) as total from postulante_asistencia where asistencia = 2 and marcacion_id = 1 and version_turno_id = " + horarioEntity.getVersion_turno_id() + " and (date(fecha) = '" + horarioEntity.getFecha() + "')";
+            Log.v(TAG, SQL);
+            cursor  = dbHelper.getDatabase().rawQuery(SQL, null);
+            if (cursor.moveToFirst())
+                total = cursor.getInt(cursor.getColumnIndex("total"));
+        } catch (Exception ex){
+            ex.printStackTrace();
+            Log.v(TAG, "Error database");
+        } finally {
+            Log.v(TAG, "End getTotalSincronizado");
+            cursor.close();
+            closeDBHelper();
+        }
+        return total;
     }
 }

@@ -35,10 +35,8 @@ import java.util.HashMap;
 
 
 public class PadronActivity extends Activity {
-    private ImageButton imageButton;
     private SessionManager sessionManager;
     private ProgressDialog progressDialog;
-    private CoordinatorLayout coordinatorLayout;
     private static final String TAG = PadronActivity.class.getSimpleName();
     private int idLocal;
     private Snackbar snackbar;
@@ -51,7 +49,7 @@ public class PadronActivity extends Activity {
         sessionManager = new SessionManager(getApplicationContext());
         HashMap<String, Object> user = sessionManager.getUserDetails();
         idLocal = (int) user.get(SessionManager.KEY_ID_LOCAL);
-        coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
+        CoordinatorLayout coordinatorLayout = (CoordinatorLayout) findViewById(R.id.coordinator);
 //        Instance progress dialog
         progressDialog = new ProgressDialog(PadronActivity.this);
         progressDialog.setMessage("Descargando Padron");
@@ -66,13 +64,13 @@ public class PadronActivity extends Activity {
 
 
 //        declare imageButton
-        imageButton = (ImageButton) findViewById(R.id.img_btn_download);
+        ImageButton imageButton = (ImageButton) findViewById(R.id.img_btn_download);
         imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Log.v(TAG, "Start download padron");
 //                Create parameters
-                HashMap<String, Integer> parameters = new HashMap<String, Integer>();
+                HashMap<String, Integer> parameters = new HashMap<>();
                 parameters.put("idLocal", idLocal);
                 Log.e(TAG, "idLocal: " + idLocal);
                 RequestQueue requestQueue = Volley.newRequestQueue(PadronActivity.this);

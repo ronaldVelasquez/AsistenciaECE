@@ -10,12 +10,9 @@ import java.util.ArrayList;
 
 public class ReportBusiness {
 
-    private static final String TAG = ReportBusiness.class.getSimpleName();
-    private Context context;
     private PostulanteDao postulanteDao;
 
     public ReportBusiness(Context context){
-        this.context = context;
         postulanteDao = PostulanteDao.getInstance(context);
     }
 

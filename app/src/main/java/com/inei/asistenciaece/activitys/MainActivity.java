@@ -1,5 +1,6 @@
 package com.inei.asistenciaece.activitys;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.inputmethod.InputMethodManager;
 
 import com.inei.asistenciaece.R;
 import com.inei.asistenciaece.Utils.SessionManager;
@@ -43,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
         HashMap<String, Object> user = sessionManager.getUserDetails();
         password = String.valueOf(user.get(SessionManager.KEY_PASSWORD));
         username = String.valueOf(user.get(SessionManager.KEY_USUARIO));
-
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         if (navigationView != null) {
             setupDrawerContent(navigationView);
+            selectItem(R.id.nav_present, getResources().getString(R.string.present_item));
         }
 
-        String drawerTitle = getResources().getString(R.string.present_item);
         if (savedInstanceState == null) {
-            selectItem(drawerTitle);
+            selectItem(R.id.nav_present, getResources().getString(R.string.present_item));
         }
 
     }
@@ -70,23 +72,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setupDrawerContent(NavigationView navigationView) {
+    private void setupDrawerContent(final NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        // Marcar item presionado
-                        menuItem.setChecked(true);
                         // Crear nuevo fragmento
                         String title = menuItem.getTitle().toString();
-                        if (title.equals(getString(R.string.close_session_item))){
+                        if (menuItem.getItemId() == R.id.nav_close_session) {
                             sessionManager.logoutUser();
                             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         } else {
-                            selectItem(title);
+                            selectItem(menuItem.getItemId(), title);
                         }
+                        // Marcar item presionado
+                        menuItem.setChecked(true);
                         return true;
                     }
                 }
@@ -96,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.menu_main, menu);
-       return true;
+        //getMenuInflater().inflate(R.menu.menu_main, menu);
+        return !drawerLayout.isDrawerOpen(GravityCompat.START) || super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -105,44 +107,47 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case android.R.id.home:
                 drawerLayout.openDrawer(GravityCompat.START);
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(drawerLayout.getWindowToken(), 0);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private void selectItem(String title) {
+    private void selectItem(int menuId, String title) {
         // Enviar título como arguemento del fragmento
         Bundle args = new Bundle();
         FragmentManager fragmentManager = getSupportFragmentManager();
         Fragment fragment;
-        switch (title){
-            case "Asistencia al Local":
+        switch (menuId) {
+            case R.id.nav_present:
                 args.putString(com.inei.asistenciaece.fragments.PresenceFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
-            case "Asistencia en Aula":
+            case R.id.nav_present_classes:
                 args.putString(com.inei.asistenciaece.fragments.PresenceClassFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceClassFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
-            case "Reportes":
-                args.putString(com.inei.asistenciaece.fragments.ReportMainFragment.ARG_SECTION_TITLE , title);
+            case R.id.nav_report:
+                args.putString(com.inei.asistenciaece.fragments.ReportMainFragment.ARG_SECTION_TITLE, title);
                 fragment = ReportMainFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
-            case "Consolidado":
+            case R.id.nav_solid:
                 args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_SECTION_TITLE, title);
                 args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_PASSWORD, password);
                 args.putString(com.inei.asistenciaece.fragments.ConsolidatedFragment.ARG_USERNAME, username);
                 fragment = ConsolidatedFragment.newInstance(title, password, username);
                 fragment.setArguments(args);
                 break;
-            case "Acerca de":
+            case R.id.nav_info:
                 args.putString(com.inei.asistenciaece.fragments.AboutFragment.ARG_SECTION_TITLE, title);
                 fragment = AboutFragment.newInstance(title);
                 fragment.setArguments(args);
                 break;
+
             default:
                 args.putString(PresenceFragment.ARG_SECTION_TITLE, title);
                 fragment = PresenceFragment.newInstance(title);
